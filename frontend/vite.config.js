@@ -5,4 +5,7 @@ import { presetUno, presetIcons } from 'unocss'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), Unocss({ presets: [presetUno(), presetIcons()] })],
+  server: {
+    port: 7777,
+  },
 })
