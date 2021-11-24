@@ -10,3 +10,5 @@ import Nav from './components/Nav.vue'
     <router-view class="p-4 bg-red-300"></router-view>
   </div>
 </template>
+
+<style></style>

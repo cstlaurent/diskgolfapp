@@ -1,5 +1,8 @@
 <script setup></script>
 
 <template>
-  <div>Home Page</div>
+  <div>
+    <div>Stats</div>
+    <div>Meilleur joueur de la planète</div>
+  </div>
 </template>
