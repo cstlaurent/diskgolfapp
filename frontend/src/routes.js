@@ -1,7 +1,7 @@
 import HomePage from './pages/Home/HomePage.vue'
 import GameListPage from './pages/GameList/GameListPage.vue'
 import PlayerListPage from './pages/PlayerList/PlayerListPage.vue'
-
+import CoursesPage from './pages/Courses/CoursesPage.vue'
 export const routes = [
   {
     path: '/',
@@ -17,5 +17,10 @@ export const routes = [
     path: '/players',
     name: 'players',
     component: PlayerListPage,
+  },
+  {
+    path: '/Courses',
+    name: 'Courses',
+    component: CoursesPage,
   },
 ]
