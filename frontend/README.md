@@ -12,7 +12,7 @@ TODO:
   - Stats de jeux
 - Game List Page
   - Starter une nouvelle game
-  - Voir la liste des ancennes games
+  - Voir la liste des anciennes games
 - Game Page
   - Start game
     - Player List
@@ -46,3 +46,7 @@ DEVOIR
 - Créer une nouvelle page (Terrain List) et l'ajouter dans le router
 
 - Créer un nouveau component (Stats.vue) et le mettre dans la Home Page
+
+DEVOIR 2:
+-Dans la page game List creer un array de game(date,players,course)
+-afficher dans la page avec v-for
