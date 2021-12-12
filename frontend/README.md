@@ -50,3 +50,4 @@ DEVOIR
 DEVOIR 2:
 -Dans la page game List creer un array de game(date,players,course)
 -afficher dans la page avec v-for
+-form pour entrer un game
