@@ -6,8 +6,8 @@ import Nav from './components/Nav.vue'
 
 <template>
   <div class="max-w-4xl mx-auto">
-    <Nav />
-    <router-view class="p-4 bg-red-300"></router-view>
+    <Nav class="border-2 border-blue-300 rounded-full" />
+    <router-view class="border-black border-2 p-4 bg-red-300"></router-view>
   </div>
 </template>
 

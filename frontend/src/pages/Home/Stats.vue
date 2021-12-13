@@ -7,6 +7,8 @@
     <li>stat4</li>
     <li>stat5</li>
   </u>
+
+  <p></p>
 </template>
 
 <script>
@@ -14,11 +16,3 @@ export default {
   name: 'stats',
 }
 </script>
-
-<style scoped>
-h1 {
-  color: rgb(56, 172, 201);
-  font-size: x-large;
-  text-align: center;
-}
-</style>
