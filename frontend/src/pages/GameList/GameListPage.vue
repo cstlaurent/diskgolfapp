@@ -1,60 +1,48 @@
-<script>
+<!-- -------------------------------------------------------------- -->
+<!-- POURQUOI JE NAI PAS LA CLASS DU ROUTERVIEW?? -->
+<script setup>
 import { ref } from 'vue'
-export default {
-  setup() {
-    const games = ref([])
-    const newGame = ref('')
-    function addGame() {
-      console.log(newGame.value)
-      games.value.push({
-        id: Date.now(),
-        done: false,
-        content: newGame.value,
-      })
-    }
-    return {
-      addGame,
-      newGame,
-      games,
-    }
-  },
+import Gamemodule from '../../components/Games.vue'
+let gamecount = 0
+const games = ref([])
+const newPlayer = ref('')
+const newCourse = ref('')
+const newDate = ref('')
+function addGame() {
+  games.value.push({
+    id: 'Game ' + gamecount++,
+    player: newPlayer.value,
+    course: newCourse.value,
+    date: newDate.value,
+  })
 }
 </script>
 
 <template>
-  <div class="font-bold text-5xl">
-    <p class="align-middle inline-block">Game list</p>
-  </div>
+  <Gamemodule />
+  <div>{{ games }}</div>
 
-  <div class="m-3">
-    <h1>Test Game</h1>
-    <ul>
-      <li>un</li>
-      <li>deux</li>
-      <li>trois</li>
-    </ul>
-  </div>
-  <br />
-  <br />
-  <br />
-  <div class="flex border-2 border-blue-500 border-opacity-50 p-5 m-5">
+  <div class="border-2 border-blue-500 shadow-md rounded-3xl p-5 mt-56">
     <form @submit.prevent="addGame">
-      <div>
-        <label for="players" class="w-20 bg-violet-400 mr-10">Players:</label>
-        <input v-model="newGame" name="newGame" class="bg-blue-100 px-60" />
+      <div class="mt-10 border-2">
+        <label for="players" class="w-20 bg-violet-400 mr-10 mt-32"
+          >Players:</label
+        >
+        <input v-model="newPlayer" name="newPlayer" class="bg-blue-100 px-60" />
       </div>
       <br />
       <div>
         <label for="course" class="w-20 bg-violet-400 mr-10">Course:</label>
-        <input class="bg-blue-100 px-60" />
+        <input v-model="newCourse" name="newCourse" class="bg-blue-100 px-60" />
       </div>
       <br />
       <label for="date" class="w-20 bg-violet-400 mr-10">Date:</label>
-      <input class="bg-blue-100 px-60" />
+      <input
+        v-model="newDate"
+        type="date"
+        class="border-2 border-blue-200 mx-10"
+      />
 
-      <br />
-      <br />
-      <br />
       <button
         class="
           bg-blue-500
@@ -65,15 +53,33 @@ export default {
           px-20
           rounded-full
           ml-60
+          mb-5
         "
       >
         Add Game
       </button>
     </form>
   </div>
-  <ul class="list-disc">
-    <li v-for="game in games" :key="game.id">
-      <h3>{{ game.content }}</h3>
-    </li>
-  </ul>
+
+  <div>
+    <table class="border-2 border-blue-500 bg-blue-100 w-full ">
+      <tr class="border-2 border-black ">
+        <td class="">Players</td>
+        <td class="">Course</td>
+        <td class="">date</td>
+        <td class="">edit/del ??</td>
+      </tr>
+
+        <div  v-for="game in games" :key="game.id">
+      <tr class="border-2 border-black ">
+          <tr>
+            <td class="">{{ game.player }}</td>
+            <td class="">{{ game.course }}</td>
+            <td class="">{{ game.date }}</td>
+            <td class="">edit/del ??</td>
+          </tr>
+      </tr>
+        </div>
+    </table>
+  </div>
 </template>

@@ -1,7 +1,9 @@
 <script>
 export default {
-  name: 'games',
+  name: 'Gamemodule',
 }
 </script>
 
-<template></template>
+<template>
+  <p>MODULE GAMES</p>
+</template>

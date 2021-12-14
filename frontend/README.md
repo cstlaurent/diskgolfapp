@@ -48,6 +48,12 @@ DEVOIR
 - Créer un nouveau component (Stats.vue) et le mettre dans la Home Page
 
 DEVOIR 2:
--Dans la page game List creer un array de game(date,players,course)
--afficher dans la page avec v-for
+
 -form pour entrer un game
+-objet dans array
+
+- tableau avec les 3 champs/ poubelle pour deleter (4 colones premiere colone type info edit delete)
+
+- delete va supprimer dans array
+
+- PLUS DIFFICILE - override la valeur dans array avec save button
