@@ -8,20 +8,45 @@ const games = ref([])
 const newPlayer = ref('')
 const newCourse = ref('')
 const newDate = ref('')
+const lignCount=0
+
 function addGame() {
+
   games.value.push({
-    id: 'Game ' + gamecount++,
+    id: gamecount++,
     player: newPlayer.value,
     course: newCourse.value,
     date: newDate.value,
-  })
+})
+
 }
+
+function deleteGame(id){
+  games.value.splice(id,1)
+gamecount--
+
+  }
+
+  
+
+
+
+
+
 </script>
 
 <template>
   <Gamemodule />
   <div>{{ games }}</div>
+ 
+ <!-- =======================================================
+ BUTTON TEST POUR DELETE -->
+ 
+ <!-- <div>
+<button class="bg-red-400 rounded-md" @click="deleteGame"> DELETE TEST</button>
 
+  </div> -->
+<!-- ========================================================== -->
   <div class="border-2 border-blue-500 shadow-md rounded-3xl p-5 mt-56">
     <form @submit.prevent="addGame">
       <div class="mt-10 border-2">
@@ -61,25 +86,34 @@ function addGame() {
     </form>
   </div>
 
-  <div>
-    <table class="border-2 border-blue-500 bg-blue-100 w-full ">
-      <tr class="border-2 border-black ">
-        <td class="">Players</td>
-        <td class="">Course</td>
-        <td class="">date</td>
-        <td class="">edit/del ??</td>
+  <div class="mt-28 ml- ml-32 ">
+    <table class="border-2 border-blue-500 bg-blue-100     ">
+      <tr class=" font-bold text-xl  ">
+      
+       <td class="inline-block  text-center w-52 ">Players</td>
+        <td class="inline-block  text-center w-52 ">Course</td>
+        <td class="inline-block  text-center w-52  ">Date</td>
+        <td class="inline-block  text-center w-52  ">Id</td>
+
+        <td class="inline-block  text-center w-52"></td>
       </tr>
 
-        <div  v-for="game in games" :key="game.id">
-      <tr class="border-2 border-black ">
+        <div  v-for="game in games" >
+      <tr class="border-2 border-blue-200">
           <tr>
-            <td class="">{{ game.player }}</td>
-            <td class="">{{ game.course }}</td>
-            <td class="">{{ game.date }}</td>
-            <td class="">edit/del ??</td>
+            
+            <td class="inline-block w-52 text-center">{{ game.player }}</td>
+            <td class="inline-block w-52 text-center">{{ game.course }}</td>
+            <td class="inline-block w-52 text-center">{{ game.date }}</td>
+            <td class="inline-block w-52 text-center">{{ game.id }}</td>
+            
+            <td class="inline-block w-52 text-center"> <button @click="deleteGame(game.id)">DELETE</button></td>
+          
           </tr>
       </tr>
         </div>
     </table>
+    
   </div>
+
 </template>
