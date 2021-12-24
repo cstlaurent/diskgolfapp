@@ -45,7 +45,7 @@ app.delete('/player/:id', async (request, reply) => {
   return ''
 })
 
-app.register(cors())
+app.register(cors)
 
 // Run the server!
 const start = async () => {

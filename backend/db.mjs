@@ -1,7 +1,12 @@
 import { nanoid } from 'nanoid'
 
 // Player database
-const players = []
+const players = [
+  {
+    id: nanoid(),
+    name: 'Mick',
+  },
+]
 
 export function getPlayers() {
   return players
@@ -9,7 +14,7 @@ export function getPlayers() {
 
 export function addPlayer(playerName) {
   const player = {
-    id: nanoid,
+    id: nanoid(),
     name: playerName,
   }
 
