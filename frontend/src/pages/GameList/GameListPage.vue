@@ -29,7 +29,7 @@ function addGame() {
       course: newCourse.value,
       date: newDate.value,
     }
-    games.value.splice(id, 1)
+    games.value.splice(editedGameid.value, 1, newGame)
   }
 
   newPlayer.value = ''
