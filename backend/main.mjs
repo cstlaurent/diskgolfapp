@@ -2,7 +2,7 @@
 import fastify from 'fastify'
 import cors from 'fastify-cors'
 
-import { addPlayer, getPlayers } from './db.mjs'
+import { addPlayer, getPlayers, getPlayer } from './db.mjs'
 
 const app = fastify({ logger: true })
 
@@ -15,6 +15,8 @@ app.get('/players', async (request, reply) => {
 app.get('/player/:id', async (request, reply) => {
   // Receive Id as url params
   // TODO
+  const requestedID = request.params.id
+  getPlayer(requestedID)
   return ''
 })
 

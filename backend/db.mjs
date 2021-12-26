@@ -11,6 +11,10 @@ const players = [
 export function getPlayers() {
   return players
 }
+export function getPlayer(id) {
+  const player = players.find((player) => id === player.id)
+  return player
+}
 
 export function addPlayer(playerName) {
   const player = {
@@ -23,10 +27,13 @@ export function addPlayer(playerName) {
   return player
 }
 
-export function editPlayer(id, playerName) {
-  // TODO
+export function editPlayer(idToEdit, playerName) {
+  const editedPlayer = players.find((player) => idToEdit === player.id)
+  editedPlayer.name = playerName
 }
 
 export function deletePlayer(id) {
-  // TODO
+  const playerIndex = players.findIndex((player) => id === player.id)
+
+  players.splice(playerIndex, 1)
 }
