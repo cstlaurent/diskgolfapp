@@ -30,6 +30,7 @@ function addGame() {
       date: newDate.value,
     }
     games.value.splice(editedGameid.value, 1, newGame)
+    isEditMode.value = false
   }
 
   newPlayer.value = ''
@@ -52,36 +53,36 @@ function editGame(id) {
 </script>
 
 <template>
-  <Gamemodule />
-  <div>{{ games }}</div>
-
-  <!-- =======================================================
- BUTTON TEST POUR DELETE -->
-
-  <!-- <div>
-<button class="bg-red-400 rounded-md" @click="deleteGame"> DELETE TEST</button>
-
-  </div> -->
-  <!-- ========================================================== -->
-  <div class="border-2 border-blue-500 shadow-md rounded-3xl p-5 mt-56">
+  <div
+    class="
+      flex
+      border-4 border-blue-400
+      bg-blue-100
+      rounded-2xl
+      p-5
+      mt-12
+      w-5/12
+      mx-auto
+    "
+  >
     <form @submit.prevent="addGame">
-      <div class="mt-10 border-2">
-        <label for="players" class="w-20 bg-violet-400 mr-10 mt-32"
+      <div class="mt-10">
+        <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
-        <input v-model="newPlayer" name="newPlayer" class="bg-blue-100 px-60" />
+        <input v-model="newPlayer" name="newPlayer" class="px-32" />
       </div>
       <br />
       <div>
-        <label for="course" class="w-20 bg-violet-400 mr-10">Course:</label>
-        <input v-model="newCourse" name="newCourse" class="bg-blue-100 px-60" />
+        <label for="course" class="w-20 mr-10 text-xl font-bold">Course:</label>
+        <input v-model="newCourse" name="newCourse" class="px-32" />
       </div>
       <br />
-      <label for="date" class="w-20 bg-violet-400 mr-10">Date:</label>
+      <label for="date" class="w-20 mr-10 text-xl font-bold">Date:</label>
       <input
         v-model="newDate"
         type="date"
-        class="border-2 border-blue-200 mx-10"
+        class="text-xl border-2 border-blue-400 mx-10 rounded-lg"
       />
 
       <button
@@ -92,10 +93,9 @@ function editGame(id) {
           text-white
           font-bold
           py-2
-          px-20
           rounded-full
-          ml-60
-          mb-5
+          ml-16
+          w-52
         "
       >
         Add Game
@@ -120,7 +120,7 @@ function editGame(id) {
     </form>
   </div>
 
-  <table class="border-2 border-blue-500 bg-blue-100">
+  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto">
     <tr class="font-bold text-xl">
       <th>Players</th>
       <th>Course</th>
@@ -166,4 +166,6 @@ function editGame(id) {
       </td>
     </tr>
   </table>
+  <Gamemodule />
+  <div>{{ games }}</div>
 </template>
