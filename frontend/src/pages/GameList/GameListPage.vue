@@ -120,12 +120,11 @@ function editGame(id) {
     </form>
   </div>
 
-  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto">
+  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
     <tr class="font-bold text-xl">
       <th>Players</th>
       <th>Course</th>
       <th>Date</th>
-      <th>Id</th>
 
       <th></th>
     </tr>
@@ -134,17 +133,16 @@ function editGame(id) {
       <td>{{ game.player }}</td>
       <td>{{ game.course }}</td>
       <td>{{ game.date }}</td>
-      <td>{{ game.id }}</td>
 
       <td class="flex gap-2">
         <button
           class="
-            px-3
-            py-1
-            bg-slate-100
-            hover:bg-slate-300
-            rounded-xl
-            transition
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            rounded-full
+            w-20
           "
           @click="deleteGame(id)"
         >
@@ -152,12 +150,12 @@ function editGame(id) {
         </button>
         <button
           class="
-            px-3
-            py-1
-            bg-slate-100
-            hover:bg-slate-300
-            rounded-xl
-            transition
+            bg-blue-500
+            hover:bg-blue-700
+            text-white
+            font-bold
+            rounded-full
+            w-20
           "
           @click="editGame(id)"
         >
