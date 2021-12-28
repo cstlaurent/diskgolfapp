@@ -3,8 +3,12 @@ import { nanoid } from 'nanoid'
 // Player database
 const players = [
   {
-    id: nanoid(),
+    id: 2,
     name: 'Mick',
+  },
+  {
+    id: 1,
+    name: 'Carl',
   },
 ]
 

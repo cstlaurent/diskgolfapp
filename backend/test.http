@@ -1,0 +1,8 @@
+
+
+### GET PLAYERS 
+GET  http://127.0.0.1:7778/players  
+
+###
+
+GET  http://127.0.0.1:7778/player/:1  
