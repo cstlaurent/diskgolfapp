@@ -15,9 +15,9 @@ app.get('/players', async (request, reply) => {
 app.get('/player/:id', async (request, reply) => {
   // Receive Id as url params
   // TODO
-  const requestedID = request.params.id
-  getPlayer(requestedID)
-  return ''
+  const requestedID = parseInt(request.params.id)
+  let requestedPlayer = getPlayer(requestedID)
+  return requestedPlayer
 })
 
 // Add new player

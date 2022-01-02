@@ -3,11 +3,11 @@ import { nanoid } from 'nanoid'
 // Player database
 const players = [
   {
-    id: 2,
+    id: '-JNsUyQ0E7Hiujjx5icG-',
     name: 'Mick',
   },
   {
-    id: 1,
+    id: 'uYMqZXiFzbrkjhV-yWiO_',
     name: 'Carl',
   },
 ]
@@ -17,6 +17,7 @@ export function getPlayers() {
 }
 export function getPlayer(id) {
   const player = players.find((player) => id === player.id)
+  console.log(player)
   return player
 }
 
