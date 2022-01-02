@@ -5,4 +5,12 @@ GET  http://127.0.0.1:7778/players
 
 ###
 
-GET  http://127.0.0.1:7778/player/:1  
+GET  http://127.0.0.1:7778/player/-JNsUyQ0E7Hiujjx5icG-
+
+###
+
+POST http://127.0.0.1:7778/player/
+
+###
+
+DELETE http://127.0.0.1:7778/player/-JNsUyQ0E7Hiujjx5icG-

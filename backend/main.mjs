@@ -2,7 +2,7 @@
 import fastify from 'fastify'
 import cors from 'fastify-cors'
 
-import { addPlayer, getPlayers, getPlayer } from './db.mjs'
+import { addPlayer, getPlayers, getPlayer, deletePlayer } from './db.mjs'
 
 const app = fastify({ logger: true })
 
@@ -13,9 +13,7 @@ app.get('/players', async (request, reply) => {
 
 // Get specific players
 app.get('/player/:id', async (request, reply) => {
-  // Receive Id as url params
-  // TODO
-  const requestedID = parseInt(request.params.id)
+  const requestedID = request.params.id
   let requestedPlayer = getPlayer(requestedID)
   return requestedPlayer
 })
@@ -43,8 +41,8 @@ app.put('/player/:id', async (request, reply) => {
 // Delete specific player
 app.delete('/player/:id', async (request, reply) => {
   // Receive Id as url params
-  // TODO
-  return ''
+  const requestedID = request.params.id
+  deletePlayer(requestedID)
 })
 
 app.register(cors)
@@ -59,3 +57,5 @@ const start = async () => {
   }
 }
 start()
+
+// parse.int()  A VOIR. MODIFIE STRING EN NUM
