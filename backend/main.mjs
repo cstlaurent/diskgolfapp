@@ -2,7 +2,13 @@
 import fastify from 'fastify'
 import cors from 'fastify-cors'
 
-import { addPlayer, getPlayers, getPlayer, deletePlayer } from './db.mjs'
+import {
+  addPlayer,
+  getPlayers,
+  getPlayer,
+  deletePlayer,
+  editPlayer,
+} from './db.mjs'
 
 const app = fastify({ logger: true })
 
@@ -30,14 +36,21 @@ app.post('/player', async (request, reply) => {
   return { newPlayer: newPlayer }
 })
 
-// Edit specific player
+// Edit specific player-----------------------------------------------------------------------------------------------------
 app.put('/player/:id', async (request, reply) => {
   // Receive Id as url params
+  const requestedID = request.params.id
   // Receive body: {name: "Player Name"}
-  // TODO
-  return ''
-})
+  if (!request.body.name) {
+    reply.statusCode = 400
+    return 'Bad Data'
+  }
+  const playerName = request.body.name
+  const editedPlayer = editPlayer(requestedID, playerName)
 
+  return { editedPlayer: editedPlayer }
+})
+//--------------------------------------------------------------------------------------------------------------------------
 // Delete specific player
 app.delete('/player/:id', async (request, reply) => {
   // Receive Id as url params

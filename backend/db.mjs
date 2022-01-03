@@ -35,6 +35,7 @@ export function addPlayer(playerName) {
 export function editPlayer(idToEdit, playerName) {
   const editedPlayer = players.find((player) => idToEdit === player.id)
   editedPlayer.name = playerName
+  return playerName
 }
 
 export function deletePlayer(id) {

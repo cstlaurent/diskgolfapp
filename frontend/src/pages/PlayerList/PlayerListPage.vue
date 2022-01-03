@@ -16,7 +16,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>Player List Page</div>
+  <div class="text-4xl font-bold text-center bg-blue-200 mt-10 mb-48">
+    PLAYERS
+  </div>
   <div v-for="pl in players">
     {{ pl }}
   </div>
