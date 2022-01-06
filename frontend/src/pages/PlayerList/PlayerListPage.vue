@@ -19,7 +19,7 @@ onMounted(async () => {
   <div class="text-4xl font-bold text-center bg-blue-200 mt-10 mb-48">
     PLAYERS
   </div>
-  <div v-for="pl in players">
-    {{ pl }}
+  <div class="text-xl font-bold text-blue-500 ml-6" v-for="pl in players">
+    {{ pl.name }}
   </div>
 </template>

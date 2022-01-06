@@ -1,5 +1,3 @@
-<!-- -------------------------------------------------------------- -->
-<!-- POURQUOI JE NAI PAS LA CLASS DU ROUTERVIEW?? -->
 <script setup>
 import { ref } from 'vue'
 import Gamemodule from '../../components/Games.vue'
@@ -53,17 +51,16 @@ function editGame(id) {
 </script>
 
 <template>
+  <div class="bg-blue-300 mt-28 h-48">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-52"
+    >
+      Start Game
+    </button>
+  </div>
+
   <div
-    class="
-      flex
-      border-4 border-blue-400
-      bg-blue-100
-      rounded-2xl
-      p-5
-      mt-12
-      w-5/12
-      mx-auto
-    "
+    class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-72 w-5/12 mx-auto"
   >
     <form @submit.prevent="addGame">
       <div class="mt-10">
@@ -87,33 +84,14 @@ function editGame(id) {
 
       <button
         v-if="isEditMode === false"
-        class="
-          bg-blue-500
-          hover:bg-blue-700
-          text-white
-          font-bold
-          py-2
-          rounded-full
-          ml-16
-          w-52
-        "
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full ml-16 w-52"
       >
         Add Game
       </button>
 
       <button
         v-else
-        class="
-          bg-blue-500
-          hover:bg-blue-700
-          text-white
-          font-bold
-          py-2
-          px-20
-          rounded-full
-          ml-60
-          mb-5
-        "
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
       >
         Save
       </button>
@@ -136,27 +114,13 @@ function editGame(id) {
 
       <td class="flex gap-2">
         <button
-          class="
-            bg-blue-500
-            hover:bg-blue-700
-            text-white
-            font-bold
-            rounded-full
-            w-20
-          "
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
           @click="deleteGame(id)"
         >
           DELETE
         </button>
         <button
-          class="
-            bg-blue-500
-            hover:bg-blue-700
-            text-white
-            font-bold
-            rounded-full
-            w-20
-          "
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
           @click="editGame(id)"
         >
           Edit
