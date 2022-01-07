@@ -59,3 +59,23 @@ DEVOIR 2:
 - PLUS DIFFICILE - override la valeur dans array avec save button
 
 Devoir 3:
+
+-players create edit delete fully working (back et front)
+-courses create edit delete fully working (back et front)
+-game page dropdown pour selection player/courses et date ajd default
+-players doit pouvoir accepter plusieurs et (radio checkbox liste)
+
+Devoir 4:
+-clean up backend
+-2 folder
+1 db
+1 web
+
+splitter database
+
+Devoir 5 :
+-filtre sur la liste de players
+-SEARCH ?????
+
+DB - knex.js
+sq lite

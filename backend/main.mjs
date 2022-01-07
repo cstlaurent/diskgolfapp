@@ -23,6 +23,7 @@ import {
 const app = fastify({ logger: true })
 
 // Get players
+
 app.get('/players', async (request, reply) => {
   return { players: getPlayers() }
 })
