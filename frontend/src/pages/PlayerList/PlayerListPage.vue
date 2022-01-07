@@ -2,9 +2,41 @@
 import { onMounted, ref } from 'vue'
 
 const players = ref([])
-const addPlayer = ref('')
+const newPlayer = ref('')
+const isEditMode = ref(false)
 
 onMounted(async () => {
+  await loadPlayers()
+})
+
+async function post() {
+  const newP = {
+    name: newPlayer.value,
+  }
+  const body = JSON.stringify(newP)
+  const playersResponse = await fetch('http://127.0.0.1:7778/player', {
+    body: body,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  newPlayer.value = ''
+  await loadPlayers()
+}
+
+async function del() {
+  const playersResponse = await fetch('http://127.0.0.1:7778/player/:id', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  newPlayer.value = ''
+  await loadPlayers()
+}
+
+async function loadPlayers() {
   const playersResponse = await fetch('http://127.0.0.1:7778/players')
 
   console.log('Players', playersResponse)
@@ -13,24 +45,55 @@ onMounted(async () => {
 
   // p = {players: [...]}
   players.value = p.players
-})
+}
 </script>
 
 <template>
   <div class="text-4xl font-bold text-center bg-blue-200 mt-10 mb-48">
     PLAYERS
   </div>
-  <div class="my-40">
-    <form @submit.prevent="">
+  <div class="my-40 bg-yellow-100">
+    <div>
+      <input
+        name="Addplayer"
+        class="bg-violet-200 mx-20 w-1/2"
+        v-model="newPlayer"
+      />
       <button
+        @click="post"
         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 rounded-full w-52"
       >
         Add Player
       </button>
-      <input name="Addplayer" class="bg-violet-200" v-model="addPlayer" />
-    </form>
+    </div>
   </div>
-  <div></div>
+
+  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
+    <tr class="font-bold text-xl">
+      <th>Players</th>
+      <th></th>
+    </tr>
+
+    <tr v-for="(pl, id) in players" class="border-2 border-blue-200">
+      <td>{{ pl.name }}</td>
+
+      <td class="flex gap-2 ml-64">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+          @click="del(id)"
+        >
+          DELETE
+        </button>
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+          @click="editGame(id)"
+        >
+          Edit
+        </button>
+      </td>
+    </tr>
+  </table>
+
   <div class="text-xl font-bold text-blue-500 ml-6" v-for="pl in players">
     {{ pl.name }}
   </div>
