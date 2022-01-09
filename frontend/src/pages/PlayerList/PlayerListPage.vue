@@ -24,15 +24,37 @@ async function post() {
   newPlayer.value = ''
   await loadPlayers()
 }
-
-async function del() {
-  const playersResponse = await fetch('http://127.0.0.1:7778/player/:id', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+async function editGame(idToEdit) {
+  isEditMode.value = true
+  const modifiedPlayer = {
+    name: newPlayer.value,
+  }
+  const body = JSON.stringify(modifiedPlayer)
+  const playersResponse = await fetch(
+    `http://127.0.0.1:7778/player/${idToEdit}`,
+    {
+      body: body,
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
   newPlayer.value = ''
+  await loadPlayers()
+}
+
+async function del(idToDel) {
+  const playersResponse = await fetch(
+    `http://127.0.0.1:7778/player/${idToDel}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
   await loadPlayers()
 }
 
@@ -61,9 +83,16 @@ async function loadPlayers() {
       />
       <button
         @click="post"
+        v-if="isEditMode === false"
         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 rounded-full w-52"
       >
         Add Player
+      </button>
+      <button
+        v-else
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
+      >
+        Save
       </button>
     </div>
   </div>
@@ -80,13 +109,13 @@ async function loadPlayers() {
       <td class="flex gap-2 ml-64">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="del(id)"
+          @click="del(pl.id)"
         >
           DELETE
         </button>
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="editGame(id)"
+          @click="editGame(pl.id)"
         >
           Edit
         </button>
