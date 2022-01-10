@@ -9,39 +9,49 @@ onMounted(async () => {
   await loadPlayers()
 })
 
-async function post() {
-  const newP = {
-    name: newPlayer.value,
-  }
-  const body = JSON.stringify(newP)
-  const playersResponse = await fetch('http://127.0.0.1:7778/player', {
-    body: body,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  newPlayer.value = ''
-  await loadPlayers()
-}
-async function editGame(idToEdit) {
-  isEditMode.value = true
-  const modifiedPlayer = {
-    name: newPlayer.value,
-  }
-  const body = JSON.stringify(modifiedPlayer)
-  const playersResponse = await fetch(
-    `http://127.0.0.1:7778/player/${idToEdit}`,
-    {
+async function post(idToEdit) {
+  if (isEditMode.value === false) {
+    const newP = {
+      name: newPlayer.value,
+    }
+    const body = JSON.stringify(newP)
+    const playersResponse = await fetch('http://127.0.0.1:7778/player', {
       body: body,
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+    })
+  } else {
+    //  EDIT MODE TRUE POUR SAUVEGARDER
+    console.log('IDIDIDIDID' + idToEdit)
+    const modifiedPlayer = {
+      name: newPlayer.value,
     }
-  )
-  newPlayer.value = ''
+    const body = JSON.stringify(modifiedPlayer)
+    const playersResponse = await fetch(
+      `http://127.0.0.1:7778/player/${idToEdit}`,
+      {
+        body: body,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+  }
   await loadPlayers()
+  isEditMode.value = false
+  newPlayer.value = ''
+}
+async function editPlayer(idToEdit) {
+  isEditMode.value = true
+  // verifier ID pour chaque players
+  for (const PLA of players.value) {
+    if (PLA.id === idToEdit) {
+      newPlayer.value = PLA.name
+    }
+  }
 }
 
 async function del(idToDel) {
@@ -89,6 +99,7 @@ async function loadPlayers() {
         Add Player
       </button>
       <button
+        @click="post"
         v-else
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
       >
@@ -103,7 +114,7 @@ async function loadPlayers() {
       <th></th>
     </tr>
 
-    <tr v-for="(pl, id) in players" class="border-2 border-blue-200">
+    <tr v-for="pl in players" class="border-2 border-blue-200">
       <td>{{ pl.name }}</td>
 
       <td class="flex gap-2 ml-64">
@@ -115,7 +126,7 @@ async function loadPlayers() {
         </button>
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="editGame(pl.id)"
+          @click="editPlayer(pl.id)"
         >
           Edit
         </button>
@@ -126,4 +137,6 @@ async function loadPlayers() {
   <div class="text-xl font-bold text-blue-500 ml-6" v-for="pl in players">
     {{ pl.name }}
   </div>
+
+  <div>{{ players }}</div>
 </template>

@@ -42,6 +42,7 @@ function playerRoutes(app, options, done) {
       return 'Bad Data'
     }
     const playerName = request.body.name
+
     const editedPlayer = editPlayer(requestedID, playerName)
 
     return { editedPlayer: editedPlayer }
