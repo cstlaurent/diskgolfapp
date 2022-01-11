@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import Gamemodule from '../../components/Games.vue'
+import DropDownplayers from '../../components/DropDownplayers.vue'
 import { nanoid } from 'nanoid'
+import DropDown from '../../components/DropDownplayers.vue'
 
 const games = ref([])
 const newPlayer = ref('')
@@ -67,7 +69,7 @@ function editGame(id) {
         <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
-        <input v-model="newPlayer" name="newPlayer" class="px-32" />
+        <DropDown />
       </div>
       <br />
       <div>

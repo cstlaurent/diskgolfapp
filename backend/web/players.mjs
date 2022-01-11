@@ -37,6 +37,7 @@ function playerRoutes(app, options, done) {
     // Receive Id as url params
     const requestedID = request.params.id
     // Receive body: {name: "Player Name"}
+
     if (!request.body.name) {
       reply.statusCode = 400
       return 'Bad Data'
@@ -44,6 +45,10 @@ function playerRoutes(app, options, done) {
     const playerName = request.body.name
 
     const editedPlayer = editPlayer(requestedID, playerName)
+
+    if (editedPlayer === null) {
+      reply.statusCode = 404
+    }
 
     return { editedPlayer: editedPlayer }
   })

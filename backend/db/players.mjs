@@ -10,7 +10,7 @@ const players = [
     name: 'Carl',
   },
   {
-    id: 'uYMqZXiFzbrkjhV-yWiO_',
+    id: 'uYMqZXiFzbr-yWiO_',
     name: 'Garry',
   },
 ]
@@ -37,6 +37,9 @@ export function addPlayer(playerName) {
 
 export function editPlayer(idToEdit, playerName) {
   const editedPlayer = players.find((player) => idToEdit === player.id)
+  if (editedPlayer === undefined) {
+    return null
+  }
   editedPlayer.name = playerName
   return playerName
 }

@@ -62,7 +62,6 @@ Devoir 3:
 
 -players create edit delete fully working (back et front)
 -courses create edit delete fully working (back et front)
-!!! VOIR POUR EXPORT TO MAIN AVEC CARL
 -game page dropdown pour selection player/courses et date ajd default
 -players doit pouvoir accepter plusieurs et (radio checkbox liste)
 

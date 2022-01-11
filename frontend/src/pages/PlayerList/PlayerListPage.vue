@@ -9,7 +9,7 @@ onMounted(async () => {
   await loadPlayers()
 })
 
-async function post(idToEdit) {
+async function post() {
   if (isEditMode.value === false) {
     const newP = {
       name: newPlayer.value,
@@ -23,14 +23,14 @@ async function post(idToEdit) {
       },
     })
   } else {
-    //  EDIT MODE TRUE POUR SAUVEGARDER
-    console.log('IDIDIDIDID' + idToEdit)
+    //  EDIT MODE RECOIT ID TO EDIT DE LA FUNCTION EDITPLAYER
+
     const modifiedPlayer = {
       name: newPlayer.value,
     }
     const body = JSON.stringify(modifiedPlayer)
     const playersResponse = await fetch(
-      `http://127.0.0.1:7778/player/${idToEdit}`,
+      `http://127.0.0.1:7778/player/${isEditMode.value}`,
       {
         body: body,
         method: 'PUT',
@@ -45,11 +45,12 @@ async function post(idToEdit) {
   newPlayer.value = ''
 }
 async function editPlayer(idToEdit) {
-  isEditMode.value = true
+  isEditMode.value = idToEdit
   // verifier ID pour chaque players
   for (const PLA of players.value) {
     if (PLA.id === idToEdit) {
       newPlayer.value = PLA.name
+      console.log('is edit mode ===' + isEditMode.value)
     }
   }
 }
@@ -114,7 +115,7 @@ async function loadPlayers() {
       <th></th>
     </tr>
 
-    <tr v-for="pl in players" class="border-2 border-blue-200">
+    <tr :key="pl.id" v-for="pl in players" class="border-2 border-blue-200">
       <td>{{ pl.name }}</td>
 
       <td class="flex gap-2 ml-64">
