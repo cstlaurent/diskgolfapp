@@ -5,13 +5,12 @@ import Nav from './components/Nav.vue'
 </script>
 
 <template>
-  <div class="max-w-full mx-auto border-black border-2">
-    <Nav class="border-2 border-blue-300 rounded-full" />
+  <div class="max-w-full border-black border-2">
+    <Nav class="border-2 border-blue-400 rounded-xl" />
 
     <!-- ----------------------------------------------------------------------------------------- -->
     <!-- // pourquoi la class du router view??? -->
     <router-view></router-view>
-    <!-- class="border-black border-2 p-4 bg-red-300" -->
   </div>
 </template>
 

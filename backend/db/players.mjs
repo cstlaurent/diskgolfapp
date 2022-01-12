@@ -11,7 +11,7 @@ const players = [
   },
   {
     id: 'uYMqZXiFzbr-yWiO_',
-    name: 'Garry',
+    name: 'Gary',
   },
 ]
 
