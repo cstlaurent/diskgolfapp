@@ -1,12 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-
+import { getPlayerList } from '../../api/players'
 const players = ref([])
 const newPlayer = ref('')
 const isEditMode = ref(false)
 
 onMounted(async () => {
-  await loadPlayers()
+  players.value = await getPlayerList()
 })
 
 async function post() {
@@ -40,7 +40,7 @@ async function post() {
       }
     )
   }
-  await loadPlayers()
+  players.value = await getPlayerList()
   isEditMode.value = false
   newPlayer.value = ''
 }
@@ -66,18 +66,7 @@ async function del(idToDel) {
     }
   )
 
-  await loadPlayers()
-}
-
-async function loadPlayers() {
-  const playersResponse = await fetch('http://127.0.0.1:7778/players')
-
-  console.log('Players', playersResponse)
-
-  const p = await playersResponse.json()
-
-  // p = {players: [...]}
-  players.value = p.players
+  players.value = await getPlayerList()
 }
 </script>
 

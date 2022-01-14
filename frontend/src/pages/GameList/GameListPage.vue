@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
-import Gamemodule from '../../components/Games.vue'
-import DropDownplayers from '../../components/DropDownplayers.vue'
+import { ref, onMounted } from 'vue'
 import { nanoid } from 'nanoid'
-import DropDown from '../../components/DropDownplayers.vue'
+import Gamemodule from '../../components/Games.vue'
+import DropDown from '../../components/DropDown.vue'
+import { getPlayerList } from '../../api/players'
 
 const games = ref([])
 const newPlayer = ref('')
@@ -11,7 +11,11 @@ const newCourse = ref('')
 const newDate = ref('')
 const isEditMode = ref(false)
 const editedGameid = ref('')
+const players = ref([])
 
+onMounted(async () => {
+  players.value = await getPlayerList()
+})
 function addGame() {
   if (isEditMode.value === false) {
     games.value.push({
@@ -53,14 +57,6 @@ function editGame(id) {
 </script>
 
 <template>
-  <div class="bg-blue-300 mt-28 h-48">
-    <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-52"
-    >
-      Start Game
-    </button>
-  </div>
-
   <div
     class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-72 w-5/12 mx-auto"
   >
@@ -69,7 +65,7 @@ function editGame(id) {
         <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
-        <DropDown />
+        <DropDown :players="players" />
       </div>
       <br />
       <div>

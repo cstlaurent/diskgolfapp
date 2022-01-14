@@ -79,3 +79,6 @@ Devoir 5 :
 
 DB - knex.js
 sq lite
+
+Devoir 6 :
+Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete si missclick

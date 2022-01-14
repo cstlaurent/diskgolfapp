@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     port: 7777,
+    alias: {
+      'composition api': 'vue',
+    },
+    optimizeDeps: {
+      include: ['nouislider', 'wnumb', 'trix'],
+    },
   },
 })
