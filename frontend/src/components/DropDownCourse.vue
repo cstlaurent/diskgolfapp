@@ -7,26 +7,26 @@ import {
   ListboxOption,
 } from '@headlessui/vue'
 const props = defineProps({
-  players: Array,
+  courses: Array,
 })
 
-const selectedPerson = ref()
-function choosePlayer(joueur) {
-  emit('playerSelected', joueur)
+const selectedCourse = ref()
+function chooseCourse(course) {
+  emit('courseSelected', course)
 }
 const emit = defineEmits({
-  playerSelected: null,
+  courseSelected: null,
 })
 </script>
 
 <template>
   <div class="w-72">
-    <Listbox v-model="selectedPerson">
+    <Listbox v-model="selectedCourse">
       <div class="relative mt-1">
         <ListboxButton
           class="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
         >
-          <span class="block truncate">Chose A Player</span>
+          <span class="block truncate">Chose A Course</span>
           <span
             class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
           >
@@ -39,10 +39,10 @@ const emit = defineEmits({
         >
           <ListboxOption
             v-slot="{ active, selected }"
-            v-for="person in props.players"
-            @click="choosePlayer(person)"
-            :key="person.name"
-            :value="person"
+            v-for="course in props.courses"
+            @click="chooseCourse(course)"
+            :key="course.name"
+            :value="course"
             as="template"
           >
             <li
@@ -56,7 +56,7 @@ const emit = defineEmits({
                   selected ? 'font-medium' : 'font-normal',
                   'block truncate',
                 ]"
-                >{{ person.name }}</span
+                >{{ course.name }}</span
               >
               <span
                 v-if="selected"

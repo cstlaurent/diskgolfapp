@@ -2,8 +2,10 @@
 import { ref, onMounted } from 'vue'
 import { nanoid } from 'nanoid'
 import Gamemodule from '../../components/Games.vue'
-import DropDown from '../../components/DropDown.vue'
+import dropdownPlayer from '../../components/DropDown.vue'
+import dropdownCourse from '../../components/DropDownCourse.vue'
 import { getPlayerList } from '../../api/players'
+import { getCourseList } from '../../api/courses'
 
 const games = ref([])
 const newPlayer = ref('')
@@ -12,10 +14,21 @@ const newDate = ref('')
 const isEditMode = ref(false)
 const editedGameid = ref('')
 const players = ref([])
+const courses = ref([])
+const selectedPlayers = ref([])
+const selectedCourse = ref([])
 
 onMounted(async () => {
   players.value = await getPlayerList()
+  courses.value = await getCourseList()
 })
+function playerSelected(player) {
+  selectedPlayers.value.push(player)
+}
+function deleteSelectedPlayer(id) {
+  selectedPlayers.value.splice(id, 1)
+}
+
 function addGame() {
   if (isEditMode.value === false) {
     games.value.push({
@@ -57,20 +70,44 @@ function editGame(id) {
 </script>
 
 <template>
+  <div>{{ selectedCourse }}</div>
+  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-4/12">
+    <tr class="font-bold text-xl">
+      <th>Players</th>
+      <th></th>
+    </tr>
+
+    <tr
+      v-for="(player, id) in selectedPlayers"
+      class="border-2 border-blue-200"
+    >
+      <td>{{ player.name }}</td>
+
+      <td class="flex gap-1">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+          @click="deleteSelectedPlayer(id)"
+        >
+          DELETE
+        </button>
+      </td>
+    </tr>
+  </table>
+
   <div
-    class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-72 w-5/12 mx-auto"
+    class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-24 w-5/12 mx-auto"
   >
     <form @submit.prevent="addGame">
       <div class="mt-10">
         <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
-        <DropDown :players="players" />
+        <dropdownPlayer @playerSelected="playerSelected" :players="players" />
       </div>
       <br />
       <div>
         <label for="course" class="w-20 mr-10 text-xl font-bold">Course:</label>
-        <input v-model="newCourse" name="newCourse" class="px-32" />
+        <dropdownCourse @courseSelected="courseSelected" :courses="courses" />
       </div>
       <br />
       <label for="date" class="w-20 mr-10 text-xl font-bold">Date:</label>
@@ -96,7 +133,7 @@ function editGame(id) {
     </form>
   </div>
 
-  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
+  <!-- <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
     <tr class="font-bold text-xl">
       <th>Players</th>
       <th>Course</th>
@@ -125,7 +162,7 @@ function editGame(id) {
         </button>
       </td>
     </tr>
-  </table>
+  </table> -->
   <Gamemodule />
   <div>{{ games }}</div>
 </template>

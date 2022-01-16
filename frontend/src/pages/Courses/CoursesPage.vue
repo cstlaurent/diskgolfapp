@@ -1,19 +1,13 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { getCourseList } from '../../api/courses'
 
 const courses = ref([])
 const isEditMode = ref(false)
 const newCourse = ref('')
 
 onMounted(async () => {
-  const coursesResponse = await fetch('http://127.0.0.1:7778/courses')
-
-  console.log('Courses', coursesResponse)
-
-  const c = await coursesResponse.json()
-
-  // c = {courses: [...]}
-  courses.value = c.courses
+  courses.value = await getCourseList()
 })
 
 async function post() {
