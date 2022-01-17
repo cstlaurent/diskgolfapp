@@ -17,7 +17,15 @@ const players = ref([])
 const courses = ref([])
 const selectedPlayers = ref([])
 const selectedCourse = ref([])
+const date = ref(currentDate())
 
+function currentDate() {
+  const current = new Date()
+  const date = `${current.getFullYear()}-${
+    current.getMonth() + 1
+  }-${current.getDate()}`
+  return date
+}
 onMounted(async () => {
   players.value = await getPlayerList()
   courses.value = await getCourseList()
@@ -25,8 +33,13 @@ onMounted(async () => {
 function playerSelected(player) {
   selectedPlayers.value.push(player)
 }
-function deleteSelectedPlayer(id) {
-  selectedPlayers.value.splice(id, 1)
+function courseSelected(course) {
+  selectedCourse.value.splice(0, 1, course)
+}
+function deleteSelectedPlayer(player) {
+  selectedPlayers.value.splice(player.id, 1)
+  //push le players dans les choix pour ne pas qu'il disparaisse
+  players.value.push(player)
 }
 
 function addGame() {
@@ -70,54 +83,30 @@ function editGame(id) {
 </script>
 
 <template>
-  <div>{{ selectedCourse }}</div>
-  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-4/12">
-    <tr class="font-bold text-xl">
-      <th>Players</th>
-      <th></th>
-    </tr>
-
-    <tr
-      v-for="(player, id) in selectedPlayers"
-      class="border-2 border-blue-200"
-    >
-      <td>{{ player.name }}</td>
-
-      <td class="flex gap-1">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="deleteSelectedPlayer(id)"
-        >
-          DELETE
-        </button>
-      </td>
-    </tr>
-  </table>
-
   <div
     class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-24 w-5/12 mx-auto"
   >
     <form @submit.prevent="addGame">
-      <div class="mt-10">
+      <div class="mt-10 z-20">
         <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
         <dropdownPlayer @playerSelected="playerSelected" :players="players" />
       </div>
       <br />
-      <div>
+      <div class="z-10">
         <label for="course" class="w-20 mr-10 text-xl font-bold">Course:</label>
         <dropdownCourse @courseSelected="courseSelected" :courses="courses" />
       </div>
       <br />
-      <label for="date" class="w-20 mr-10 text-xl font-bold">Date:</label>
+      <!-- <label for="date" class="w-20 mr-10 text-xl font-bold">Date:</label>
       <input
         v-model="newDate"
         type="date"
         class="text-xl border-2 border-blue-400 mx-10 rounded-lg"
-      />
+      /> -->
 
-      <button
+      <!-- <button
         v-if="isEditMode === false"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full ml-16 w-52"
       >
@@ -129,7 +118,30 @@ function editGame(id) {
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
       >
         Save
-      </button>
+      </button> -->
+      <table class="bg-blue-200 mt-24 mx-auto">
+        <tr class="font-bold text-xl border-2 border-blue-500">
+          <th>Players</th>
+          <th v-for="course in selectedCourse">{{ course.name }}</th>
+          <th>{{ date }}</th>
+        </tr>
+
+        <tr
+          v-for="(player, id) in selectedPlayers"
+          class="border-2 border-blue-200"
+        >
+          <td>{{ player.name }}</td>
+
+          <td class="flex">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 m-3"
+              @click="deleteSelectedPlayer(player)"
+            >
+              DELETE
+            </button>
+          </td>
+        </tr>
+      </table>
     </form>
   </div>
 

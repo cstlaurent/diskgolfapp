@@ -48,6 +48,7 @@ function playerRoutes(app, options, done) {
 
     if (editedPlayer === null) {
       reply.statusCode = 404
+      return 'Bad Data'
     }
 
     return { editedPlayer: editedPlayer }

@@ -22,6 +22,9 @@ async function post() {
         'Content-Type': 'application/json',
       },
     })
+    if (playersResponse.status === 400) {
+      alert('Please enter a player name')
+    }
   } else {
     //  EDIT MODE RECOIT ID TO EDIT DE LA FUNCTION EDITPLAYER
 
@@ -50,7 +53,6 @@ async function editPlayer(idToEdit) {
   for (const PLA of players.value) {
     if (PLA.id === idToEdit) {
       newPlayer.value = PLA.name
-      console.log('is edit mode ===' + isEditMode.value)
     }
   }
 }
@@ -74,6 +76,7 @@ async function del(idToDel) {
   <div class="text-4xl font-bold text-center bg-blue-200 mt-10 mb-48">
     PLAYERS
   </div>
+
   <div class="my-40 bg-yellow-100">
     <div>
       <input

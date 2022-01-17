@@ -11,7 +11,8 @@ const props = defineProps({
 })
 
 const selectedPerson = ref()
-function choosePlayer(joueur) {
+function choosePlayer(joueur, id) {
+  props.players.splice(id, 1)
   emit('playerSelected', joueur)
 }
 const emit = defineEmits({
@@ -26,7 +27,7 @@ const emit = defineEmits({
         <ListboxButton
           class="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
         >
-          <span class="block truncate">Chose A Player</span>
+          <span class="block truncate">Select players</span>
           <span
             class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
           >
@@ -35,12 +36,12 @@ const emit = defineEmits({
         </ListboxButton>
 
         <ListboxOptions
-          class="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          class="z-10 absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
           <ListboxOption
             v-slot="{ active, selected }"
-            v-for="person in props.players"
-            @click="choosePlayer(person)"
+            v-for="(person, id) in props.players"
+            @click="choosePlayer(person, id)"
             :key="person.name"
             :value="person"
             as="template"

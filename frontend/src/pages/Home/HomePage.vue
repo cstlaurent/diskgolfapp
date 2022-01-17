@@ -7,7 +7,7 @@ import stats from './Stats.vue'
 <template>
   <div>
     <div></div>
-    <div>{{ test }}</div>
+
     <div><stats /></div>
   </div>
 </template>

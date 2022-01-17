@@ -83,5 +83,7 @@ sq lite
 Devoir 6 :
 Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete si missclick
 
-15 janv:
-faire devoir 6 (click pour add player dans la page)
+TODO
+-Ajouter les autres fonctions a api
+
+-modifier post games/edit pour accepter mon nouveau setup dropdown.
