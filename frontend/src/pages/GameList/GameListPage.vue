@@ -6,8 +6,10 @@ import dropdownPlayer from '../../components/DropDown.vue'
 import dropdownCourse from '../../components/DropDownCourse.vue'
 import { getPlayerList } from '../../api/players'
 import { getCourseList } from '../../api/courses'
+import { getGameList } from '../../api/games'
 
 const games = ref([])
+const savedGames = ref([])
 const newPlayer = ref('')
 const newCourse = ref('')
 const newDate = ref('')
@@ -29,6 +31,7 @@ function currentDate() {
 onMounted(async () => {
   players.value = await getPlayerList()
   courses.value = await getCourseList()
+  savedGames.value = await getGameList()
 })
 function playerSelected(player) {
   selectedPlayers.value.push(player)
@@ -42,34 +45,45 @@ function deleteSelectedPlayer(player) {
   players.value.push(player)
 }
 
-function addGame() {
-  if (isEditMode.value === false) {
-    games.value.push({
-      id: nanoid(),
-      player: newPlayer.value,
-      course: newCourse.value,
-      date: newDate.value,
-    })
-  } else {
-    const g = games.value[editedGameid.value]
-
-    const newGame = {
-      id: g.id,
-      player: newPlayer.value,
-      course: newCourse.value,
-      date: newDate.value,
-    }
-    games.value.splice(editedGameid.value, 1, newGame)
-    isEditMode.value = false
-  }
-
-  newPlayer.value = ''
-  newCourse.value = ''
-  newDate.value = ''
+// le add game sera le boutton pour start une game
+async function addGame() {
+  games.value.push({
+    id: nanoid(),
+    player: selectedPlayers.value,
+    course: selectedCourse.value,
+    date: date.value,
+  })
+  postGame()
+  players.value = await getPlayerList()
 }
 
-function deleteGame(id) {
-  games.value.splice(id, 1)
+async function postGame() {
+  const newGame = {
+    players: selectedPlayers.value,
+    course: selectedCourse.value,
+    date: date.value,
+  }
+  const body = JSON.stringify(newGame)
+  const gamesResponse = await fetch('http://127.0.0.1:7778/game', {
+    body: body,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  savedGames.value = await getGameList()
+  selectedPlayers.value = []
+}
+
+async function deleteGame(idToDel) {
+  const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${idToDel}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  savedGames.value = await getGameList()
 }
 
 function editGame(id) {
@@ -143,9 +157,15 @@ function editGame(id) {
         </tr>
       </table>
     </form>
+    <button
+      @click="addGame"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 h-20 m-3"
+    >
+      CREATE GAME
+    </button>
   </div>
 
-  <!-- <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
+  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
     <tr class="font-bold text-xl">
       <th>Players</th>
       <th>Course</th>
@@ -154,10 +174,10 @@ function editGame(id) {
       <th></th>
     </tr>
 
-    <tr v-for="(game, id) in games" class="border-2 border-blue-200">
-      <td>{{ game.player }}</td>
-      <td>{{ game.course }}</td>
-      <td>{{ game.date }}</td>
+    <tr v-for="(game, id) in savedGames" class="border-2 border-blue-200">
+      <td v-for="player in game.players">{{ player.name }}</td>
+      <td v-for="course in game.course">{{ course.name }}</td>
+      <td>{{ date }}</td>
 
       <td class="flex gap-2">
         <button
@@ -168,13 +188,15 @@ function editGame(id) {
         </button>
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="editGame(id)"
         >
-          Edit
+          PLAY
         </button>
       </td>
     </tr>
-  </table> -->
+  </table>
+  <div>PLAYERS{{ players }}</div>
+  <br />
+  <br />
+  <div>selected players {{ selectedPlayers }}</div>
   <Gamemodule />
-  <div>{{ games }}</div>
 </template>

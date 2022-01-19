@@ -3,11 +3,13 @@ import fastify from 'fastify'
 import cors from 'fastify-cors'
 import playerRoutes from './web/players.mjs'
 import courseRoutes from './web/courses.mjs'
+import gamesRoutes from './web/games.mjs'
 const app = fastify({ logger: true })
 
 app.register(cors)
 app.register(playerRoutes)
 app.register(courseRoutes)
+app.register(gamesRoutes)
 
 // Run the server!
 const start = async () => {

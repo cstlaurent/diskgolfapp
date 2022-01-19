@@ -86,4 +86,4 @@ Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete 
 TODO
 -Ajouter les autres fonctions a api
 
--modifier post games/edit pour accepter mon nouveau setup dropdown.
+LA game peut etre edit dans sa propre page.
