@@ -2,7 +2,7 @@ import HomePage from './pages/Home/HomePage.vue'
 import GameListPage from './pages/GameList/GameListPage.vue'
 import PlayerListPage from './pages/PlayerList/PlayerListPage.vue'
 import CoursesPage from './pages/Courses/CoursesPage.vue'
-import PlayGamePage from './pages/PlayGamePage.vue'
+import PlayGamePage from './pages/PlayGame/PlayGamePage.vue'
 
 export const routes = [
   {

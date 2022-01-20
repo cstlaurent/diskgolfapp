@@ -86,9 +86,15 @@ Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete 
 TODO
 -Ajouter les autres fonctions a api
 
-LA game peut etre edit dans sa propre page.
-
 ??????????????????????????????????????????????????????
 etudier parent/child pour api.
 
-play game nous amene sur la page de la game
+A VOIR page play
+La page de la partie doit etre un lien vers game/id?
+fetch games?
+La page doit:
+-utiliser le donnes de la game/id
+-commencer sur hole 1 et basculer les autres.
+-increase/decrease le nombe de coups
+-afficher nom du course en haut
+-avoir un boutton back to games?
