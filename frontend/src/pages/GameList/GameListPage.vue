@@ -186,17 +186,16 @@ function editGame(id) {
         >
           DELETE
         </button>
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-        >
-          PLAY
-        </button>
+        <div>
+          <router-link
+            to="/PlayGame"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+            >playgame</router-link
+          >
+        </div>
       </td>
     </tr>
   </table>
-  <div>PLAYERS{{ players }}</div>
-  <br />
-  <br />
-  <div>selected players {{ selectedPlayers }}</div>
+
   <Gamemodule />
 </template>

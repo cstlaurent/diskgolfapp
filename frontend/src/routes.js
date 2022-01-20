@@ -2,6 +2,8 @@ import HomePage from './pages/Home/HomePage.vue'
 import GameListPage from './pages/GameList/GameListPage.vue'
 import PlayerListPage from './pages/PlayerList/PlayerListPage.vue'
 import CoursesPage from './pages/Courses/CoursesPage.vue'
+import PlayGamePage from './pages/PlayGamePage.vue'
+
 export const routes = [
   {
     path: '/',
@@ -22,5 +24,10 @@ export const routes = [
     path: '/Courses',
     name: 'Courses',
     component: CoursesPage,
+  },
+  {
+    path: '/PlayGame',
+    name: 'PlayGame',
+    component: PlayGamePage,
   },
 ]
