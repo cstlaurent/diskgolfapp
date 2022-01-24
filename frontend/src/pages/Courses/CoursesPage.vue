@@ -81,9 +81,9 @@ async function loadCourses() {
 </script>
 
 <template>
-  <div class="grid grid-flow-col columns-2 border-2 border-red-500 p-6 h-72">
-    <div>
-      <input v-model="newCourse" type="text" class="bg-violet-100 w-1/3" />
+  <div class="flex-col border-2 justify-around border-red-600">
+    <div class="bg-green-200">
+      <input v-model="newCourse" type="text" class="bg-violet-100" />
       <button
         @click="post"
         v-if="isEditMode === false"
@@ -100,22 +100,25 @@ async function loadCourses() {
         Save
       </button>
     </div>
-    <div>
+    <div class="bg-yellow-200">
       <table class="border-2 border-blue-600">
         <th>course</th>
         <th></th>
         <th></th>
         <tr v-for="(c, id) in courses">
-          <td class="px-10">
+          <td class="">
             {{ c.name }}
           </td>
           <td>
-            <button @click="deleteCourse(c.id)" class="w-28">DELETE</button>
+            <button @click="deleteCourse(c.id)" class="">DELETE</button>
           </td>
-          <td><button @click="editCourse(c.id)" class="w-28">EDIT</button></td>
+          <td><button @click="editCourse(c.id)" class="">EDIT</button></td>
         </tr>
       </table>
     </div>
+    <div class="bg-pink-200"><p>test</p></div>
+    <div class="bg-green-200"><p>test</p></div>
+    <div class="bg-red-200"><p>test</p></div>
   </div>
 
   <!-- <div class="text-xl font-bold text-blue-500 ml-6" v-for="c in courses">
