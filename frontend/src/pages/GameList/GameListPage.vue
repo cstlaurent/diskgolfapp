@@ -188,7 +188,7 @@ function editGame(id) {
         </button>
         <div>
           <router-link
-            to="/PlayGame"
+            :to="`/PlayGame/${game.id}`"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
             >playgame</router-link
           >

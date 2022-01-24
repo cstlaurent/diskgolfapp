@@ -26,7 +26,7 @@ export const routes = [
     component: CoursesPage,
   },
   {
-    path: '/PlayGame',
+    path: '/PlayGame/:id',
     name: 'PlayGame',
     component: PlayGamePage,
   },
