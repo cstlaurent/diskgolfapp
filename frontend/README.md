@@ -90,11 +90,17 @@ TODO
 etudier parent/child pour api.
 
 A VOIR page play
-La page de la partie doit etre un lien vers game/id?
-fetch games?
+
 La page doit:
--utiliser le donnes de la game/id
 -commencer sur hole 1 et basculer les autres.
 -increase/decrease le nombe de coups
 -afficher nom du course en haut
 -avoir un boutton back to games?
+
+On mounted on doit creer des playingP pour garder modifier players(ajout score)
+
+le score doit etre attaché a game id et player id
+
+DEVOIR 7
+-extract api
+-reflechir a save score Playerbase

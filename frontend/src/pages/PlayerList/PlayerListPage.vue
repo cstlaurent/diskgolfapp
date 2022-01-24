@@ -1,12 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { getPlayerList } from '../../api/players'
+import * as playerApi from '../../api/players'
 const players = ref([])
 const newPlayer = ref('')
 const isEditMode = ref(false)
 
 onMounted(async () => {
-  players.value = await getPlayerList()
+  players.value = await playerApi.getPlayerList()
 })
 
 async function post() {
@@ -43,7 +43,7 @@ async function post() {
       }
     )
   }
-  players.value = await getPlayerList()
+  players.value = await playerApi.getPlayerList()
   isEditMode.value = false
   newPlayer.value = ''
 }
@@ -57,18 +57,9 @@ async function editPlayer(idToEdit) {
   }
 }
 
-async function del(idToDel) {
-  const playersResponse = await fetch(
-    `http://127.0.0.1:7778/player/${idToDel}`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-
-  players.value = await getPlayerList()
+async function deletePlayer(idToDel) {
+  await playerApi.deletePlayer(idToDel)
+  players.value = await playerApi.getPlayerList()
 }
 </script>
 
@@ -113,7 +104,7 @@ async function del(idToDel) {
       <td class="flex gap-2 ml-64">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="del(pl.id)"
+          @click="deletePlayer(pl.id)"
         >
           DELETE
         </button>

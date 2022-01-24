@@ -39,10 +39,11 @@ function playerSelected(player) {
 function courseSelected(course) {
   selectedCourse.value.splice(0, 1, course)
 }
-function deleteSelectedPlayer(player) {
+async function deleteSelectedPlayer(player) {
   selectedPlayers.value.splice(player.id, 1)
   //push le players dans les choix pour ne pas qu'il disparaisse
   players.value.push(player)
+  players.value = await getPlayerList()
 }
 
 // le add game sera le boutton pour start une game
@@ -98,10 +99,10 @@ function editGame(id) {
 
 <template>
   <div
-    class="flex border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-24 w-5/12 mx-auto"
+    class="flex-col border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-24 w-5/12 mx-auto"
   >
-    <form @submit.prevent="addGame">
-      <div class="mt-10 z-20">
+    <form class="flex-1" @submit.prevent="addGame">
+      <div class="flex-1 mt-10 z-20">
         <label for="players" class="w-20 mr-10 text-xl font-bold"
           >Players:</label
         >
@@ -113,50 +114,30 @@ function editGame(id) {
         <dropdownCourse @courseSelected="courseSelected" :courses="courses" />
       </div>
       <br />
-      <!-- <label for="date" class="w-20 mr-10 text-xl font-bold">Date:</label>
-      <input
-        v-model="newDate"
-        type="date"
-        class="text-xl border-2 border-blue-400 mx-10 rounded-lg"
-      /> -->
-
-      <!-- <button
-        v-if="isEditMode === false"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full ml-16 w-52"
-      >
-        Add Game
-      </button>
-
-      <button
-        v-else
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
-      >
-        Save
-      </button> -->
-      <table class="bg-blue-200 mt-24 mx-auto">
-        <tr class="font-bold text-xl border-2 border-blue-500">
-          <th>Players</th>
-          <th v-for="course in selectedCourse">{{ course.name }}</th>
-          <th>{{ date }}</th>
-        </tr>
-
-        <tr
-          v-for="(player, id) in selectedPlayers"
-          class="border-2 border-blue-200"
-        >
-          <td>{{ player.name }}</td>
-
-          <td class="flex">
-            <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 m-3"
-              @click="deleteSelectedPlayer(player)"
-            >
-              DELETE
-            </button>
-          </td>
-        </tr>
-      </table>
     </form>
+    <table class="bg-blue-200 mt-24 mx-auto">
+      <tr class="font-bold text-xl border-2 border-blue-500">
+        <th>Players</th>
+        <th v-for="course in selectedCourse">{{ course.name }}</th>
+        <th>{{ date }}</th>
+      </tr>
+
+      <tr
+        v-for="(player, id) in selectedPlayers"
+        class="border-2 border-blue-200"
+      >
+        <td>{{ player.name }}</td>
+
+        <td class="flex">
+          <button
+            @click="deleteSelectedPlayer"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 m-3"
+          >
+            DELETE
+          </button>
+        </td>
+      </tr>
+    </table>
     <button
       @click="addGame"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 h-20 m-3"
@@ -196,6 +177,8 @@ function editGame(id) {
       </td>
     </tr>
   </table>
+
+  <div>{{ selectedPlayers }}</div>
 
   <Gamemodule />
 </template>

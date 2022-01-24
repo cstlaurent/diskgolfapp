@@ -5,6 +5,7 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
 const route = useRoute()
 const game = ref({})
+const playing = ref({})
 const gameId = route.params.id
 
 async function getGameToPlay() {
@@ -13,11 +14,37 @@ async function getGameToPlay() {
   const gameToPlay = await gamesResponse.json()
   return gameToPlay
 }
+// function pour modifier les players en playing players (avec score)
+//dans un boucle
+function createPlaying() {
+  let playingObj = {
+    player1: {
+      name: game.value.players[0].name,
+      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
+    },
+    player2: {
+      name: game.value.players[1].name,
+      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
+    },
+    player3: {
+      name: game.value.players[2].name,
+      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
+    },
+    player4: {
+      name: game.value.players[3].name,
+      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
+    },
+  }
+  console.log('playingOBJ ----', playingObj)
+  return playingObj
+}
 
 onMounted(async () => {
   game.value = await getGameToPlay()
+  playing.value = createPlaying()
 })
 
+//a voir plus tard pour les onglets
 let categories = ref({
   'Hole 1': [
     {
@@ -84,26 +111,14 @@ let categories = ref({
     },
   ],
 })
-
-//temporaire
-const player1 = reactive({
-  score: 3,
-})
-
-const player2 = reactive({
-  score: 3,
-})
-const player3 = reactive({
-  score: 3,
-})
-const player4 = reactive({
-  score: 3,
-})
-
-function increaseScore(playerId) {}
 </script>
 
 <template>
+  <div>GAME===={{ game }}</div>
+
+  <div>GAME.PLAYERS ===={{ game.players }}</div>
+  <div>PLAYING ===={{ playing }}</div>
+
   <div class="w-screen h-screen bg-white flex flex-row p-3 mt-32">
     <div class="mx-auto w-2/3">
       <!-- Profile Card -->
@@ -117,7 +132,10 @@ function increaseScore(playerId) {}
       >
         <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
           <div class="basis-1/4 border-2 border-white rounded-lg">
-            <h2>Player 1</h2>
+            <!-- /////PLAYER 1------------------------ -->
+            <!-- vfor -->
+
+            <h2>{{ playing?.player1?.name || '' }}</h2>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
               @click=""
@@ -132,7 +150,7 @@ function increaseScore(playerId) {}
             </button>
             <div>
               <p>score:</p>
-              <h2 class="text-5xl">{{ player1.score }}</h2>
+              <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>
 
@@ -152,7 +170,7 @@ function increaseScore(playerId) {}
             </button>
             <div>
               <p>score:</p>
-              <h2 class="text-5xl">{{ player1.score }}</h2>
+              <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>
 
@@ -172,7 +190,7 @@ function increaseScore(playerId) {}
             </button>
             <div>
               <p>score:</p>
-              <h2 class="text-5xl">{{ player1.score }}</h2>
+              <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>
 
@@ -192,15 +210,14 @@ function increaseScore(playerId) {}
             </button>
             <div>
               <p>score:</p>
-              <h2 class="text-5xl">{{ player1.score }}</h2>
+              <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div>{{ game }}</div>
-
+  <!-- onglets a voir  -->
   <div class="w-full max-w-md px-2 py-16 sm:px-0">
     <TabGroup>
       <TabList class="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
