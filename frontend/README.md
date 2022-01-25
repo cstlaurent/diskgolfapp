@@ -86,9 +86,6 @@ Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete 
 TODO
 -Ajouter les autres fonctions a api
 
-??????????????????????????????????????????????????????
-etudier parent/child pour api.
-
 A VOIR page play
 
 La page doit:
@@ -101,6 +98,10 @@ On mounted on doit creer des playingP pour garder modifier players(ajout score)
 
 le score doit etre attaché a game id et player id
 
-DEVOIR 7
+DEVOIR 7 25 01
 -extract api
+-etude many to many
 -reflechir a save score Playerbase
+-ajouter comments, tout clarifier
+
+api avec body???

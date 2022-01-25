@@ -1,13 +1,13 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { getCourseList } from '../../api/courses'
+import * as courseApi from '../../api/courses'
 
 const courses = ref([])
 const isEditMode = ref(false)
 const newCourse = ref('')
 
 onMounted(async () => {
-  courses.value = await getCourseList()
+  courses.value = await courseApi.getCourseList()
 })
 
 async function post() {
@@ -41,7 +41,7 @@ async function post() {
       }
     )
   }
-  await loadCourses()
+  courses.value = await courseApi.getCourseList()
   isEditMode.value = false
   newCourse.value = ''
 }
@@ -56,27 +56,8 @@ async function editCourse(idToEdit) {
 }
 
 async function deleteCourse(idToDel) {
-  const coursesResponse = await fetch(
-    `http://127.0.0.1:7778/course/${idToDel}`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-  loadCourses()
-}
-
-async function loadCourses() {
-  const coursesResponse = await fetch('http://127.0.0.1:7778/courses')
-
-  console.log('Courses', coursesResponse)
-
-  const c = await coursesResponse.json()
-
-  // p = {players: [...]}
-  courses.value = c.courses
+  await courseApi.deleteCourse(idToDel)
+  courses.value = await courseApi.getCourseList()
 }
 </script>
 

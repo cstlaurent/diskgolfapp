@@ -4,9 +4,9 @@ import { nanoid } from 'nanoid'
 import Gamemodule from '../../components/Games.vue'
 import dropdownPlayer from '../../components/DropDown.vue'
 import dropdownCourse from '../../components/DropDownCourse.vue'
-import { getPlayerList } from '../../api/players'
-import { getCourseList } from '../../api/courses'
-import { getGameList } from '../../api/games'
+import * as apiPlayers from '../../api/players'
+import * as apiCourses from '../../api/courses'
+import * as apiGames from '../../api/games'
 
 const games = ref([])
 const savedGames = ref([])
@@ -29,9 +29,9 @@ function currentDate() {
   return date
 }
 onMounted(async () => {
-  players.value = await getPlayerList()
-  courses.value = await getCourseList()
-  savedGames.value = await getGameList()
+  players.value = await apiPlayers.getPlayerList()
+  courses.value = await apiCourses.getCourseList()
+  savedGames.value = await apiGames.getGameList()
 })
 function playerSelected(player) {
   selectedPlayers.value.push(player)
@@ -43,7 +43,7 @@ async function deleteSelectedPlayer(player) {
   selectedPlayers.value.splice(player.id, 1)
   //push le players dans les choix pour ne pas qu'il disparaisse
   players.value.push(player)
-  players.value = await getPlayerList()
+  players.value = await apiPlayers.getPlayerList()
 }
 
 // le add game sera le boutton pour start une game
@@ -55,7 +55,7 @@ async function addGame() {
     date: date.value,
   })
   postGame()
-  players.value = await getPlayerList()
+  players.value = await apiPlayers.getPlayerList()
 }
 
 async function postGame() {
@@ -72,19 +72,14 @@ async function postGame() {
       'Content-Type': 'application/json',
     },
   })
-  savedGames.value = await getGameList()
+  savedGames.value = await apiGames.getGameList()
   selectedPlayers.value = []
 }
 
 async function deleteGame(idToDel) {
-  const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${idToDel}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+  await gamesApi.deleteGame(idToDel)
 
-  savedGames.value = await getGameList()
+  savedGames.value = await apiGames.getGameList()
 }
 
 function editGame(id) {
