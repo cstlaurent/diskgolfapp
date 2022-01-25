@@ -77,7 +77,7 @@ async function postGame() {
 }
 
 async function deleteGame(idToDel) {
-  await gamesApi.deleteGame(idToDel)
+  await apiGames.deleteGame(idToDel)
 
   savedGames.value = await apiGames.getGameList()
 }

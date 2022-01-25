@@ -96,7 +96,7 @@ La page doit:
 
 On mounted on doit creer des playingP pour garder modifier players(ajout score)
 
-le score doit etre attaché a game id et player id
+le score doit etre attaché a game id et player id (many to many)
 
 DEVOIR 7 25 01
 -extract api

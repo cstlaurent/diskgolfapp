@@ -16,27 +16,15 @@ async function getGameToPlay() {
 }
 // function pour modifier les players en playing players (avec score)
 //dans un boucle
+
 function createPlaying() {
-  let playingObj = {
-    player1: {
-      name: game.value.players[0].name,
-      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
-    },
-    player2: {
-      name: game.value.players[1].name,
-      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
-    },
-    player3: {
-      name: game.value.players[2].name,
-      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
-    },
-    player4: {
-      name: game.value.players[3].name,
-      score: { h1: 0, h2: 0, h3: 0, h4: 0, h5: 0, h6: 0, h7: 0, h8: 0, h9: 0 },
-    },
+  const playingArr = []
+  for (const player of game.value.players) {
+    player.score = { h1: 0, h2: 0, h3: 0 }
+    console.log('PLAYPLAYPLAY', player)
+    playingArr.push(player)
   }
-  console.log('playingOBJ ----', playingObj)
-  return playingObj
+  return playingArr
 }
 
 onMounted(async () => {
@@ -114,9 +102,9 @@ let categories = ref({
 </script>
 
 <template>
-  <div>GAME===={{ game }}</div>
+  <!-- <div>GAME===={{ game }}</div>
 
-  <div>GAME.PLAYERS ===={{ game.players }}</div>
+  <div>GAME.PLAYERS ===={{ game.players }}</div> -->
   <div>PLAYING ===={{ playing }}</div>
 
   <div class="w-screen h-screen bg-white flex flex-row p-3 mt-32">
@@ -131,85 +119,30 @@ let categories = ref({
         "
       >
         <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
-          <div class="basis-1/4 border-2 border-white rounded-lg">
+          <div
+            v-for="players in playing"
+            class="basis-1/4 border-2 border-white rounded-lg"
+          >
             <!-- /////PLAYER 1------------------------ -->
             <!-- vfor -->
 
-            <h2>{{ playing?.player1?.name || '' }}</h2>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Increase Score
-            </button>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Decrease Score
-            </button>
-            <div>
-              <p>score:</p>
-              <h2 class="text-5xl">{{}}</h2>
-            </div>
-          </div>
+            <!-- <h2>{{ playing?.player1?.name || '' }}</h2> -->
+            <h2>{{ players.name }}</h2>
 
-          <div class="basis-1/4 border-2 border-white rounded-lg">
-            <h2>Player 2</h2>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
+              @click="players.score.h1++"
             >
               Increase Score
             </button>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
+              @click="players.score.h1--"
             >
               Decrease Score
             </button>
             <div>
-              <p>score:</p>
-              <h2 class="text-5xl">{{}}</h2>
-            </div>
-          </div>
-
-          <div class="basis-1/4 border-2 border-white rounded-lg">
-            <h2>Player 3</h2>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Increase Score
-            </button>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Decrease Score
-            </button>
-            <div>
-              <p>score:</p>
-              <h2 class="text-5xl">{{}}</h2>
-            </div>
-          </div>
-
-          <div class="basis-1/4 border-2 border-white rounded-lg">
-            <h2>Player 4</h2>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Increase Score
-            </button>
-            <button
-              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click=""
-            >
-              Decrease Score
-            </button>
-            <div>
-              <p>score:</p>
+              <p>{{ players.score.h1 }}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>

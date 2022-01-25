@@ -6,7 +6,7 @@ export async function getGameList() {
   return g.games
 }
 
-export function deleteGame(idToDel) {
+export async function deleteGame(idToDel) {
   const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${idToDel}`, {
     method: 'DELETE',
     headers: {
