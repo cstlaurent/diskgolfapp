@@ -105,3 +105,13 @@ DEVOIR 7 25 01
 -ajouter comments, tout clarifier
 
 api avec body???
+
+Quand je save une game?
+-creer objet avec
+player1 id + game id + player score
+player2 id + game id + player score
+
+devoir 18 pitons
+display score pour trou selectionne
+
+commencer api pour save game

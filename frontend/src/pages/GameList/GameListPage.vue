@@ -173,7 +173,7 @@ function editGame(id) {
     </tr>
   </table>
 
-  <div>{{ selectedPlayers }}</div>
+  <div>{{ savedGames }}</div>
 
   <Gamemodule />
 </template>
