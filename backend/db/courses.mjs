@@ -4,14 +4,17 @@ const courses = [
   {
     id: '-JNsUyQ0E7Hiujjx5',
     name: 'terrebonne',
+    setup: 18,
   },
   {
     id: 'uYMqZXiFzbrkjh',
     name: 'mirabel',
+    setup: 9,
   },
   {
     id: 'uYMqZXiFzb',
     name: 'ile Charron',
+    setup: 9,
   },
 ]
 
@@ -24,10 +27,11 @@ export function getCourse(id) {
   return course
 }
 
-export function addCourse(courseName) {
+export function addCourse(courseName, courseSetup) {
   const course = {
     id: nanoid(),
     name: courseName,
+    setup: courseSetup,
   }
 
   courses.push(course)

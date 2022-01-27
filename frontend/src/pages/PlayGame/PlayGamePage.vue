@@ -54,7 +54,13 @@ onMounted(async () => {
   <br />
   <br />
   <div>gameeeeeeee= {{ game }}</div>
-
+  <div class="text-center">
+    <button>h1</button>
+    <button>h2</button>
+    <button>h3</button>
+    <button>h4</button>
+    <button>h5</button>
+  </div>
   <div class="w-screen bg-gray-200 flex flex-row p-3 mt-32 my-5">
     <div class="mx-auto w-2/3">
       <!-- Profile Card -->
@@ -67,6 +73,8 @@ onMounted(async () => {
         "
       >
         <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
+          <div>{{}} {{ game.date }}</div>
+
           <div
             v-for="players in playing"
             class="basis-1/4 border-2 border-white rounded-lg"
@@ -89,8 +97,8 @@ onMounted(async () => {
             >
               Decrease Score
             </button>
-            <div>
-              <p>{{ players.score.h1 }}</p>
+            <div v-for="points in players.score">
+              <p>{{ points }}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>

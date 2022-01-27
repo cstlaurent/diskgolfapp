@@ -27,7 +27,8 @@ function courseRoutes(app, options, done) {
       return 'Bad Data'
     }
     const courseName = request.body.name
-    const newCourse = addCourse(courseName)
+    const courseSetup = request.body.setup
+    const newCourse = addCourse(courseName, courseSetup)
     return { newCourse: newCourse }
   })
   // Edit specific Course

@@ -5,15 +5,19 @@ import * as courseApi from '../../api/courses'
 const courses = ref([])
 const isEditMode = ref(false)
 const newCourse = ref('')
+const courseSetup = ref('')
 
 onMounted(async () => {
   courses.value = await courseApi.getCourseList()
 })
 
 async function post() {
+  console.log(courseSetup.value)
+
   if (isEditMode.value === false) {
     const newC = {
       name: newCourse.value,
+      setup: courseSetup.value,
     }
     const body = JSON.stringify(newC)
     const coursesResponse = await fetch('http://127.0.0.1:7778/course', {
@@ -65,6 +69,27 @@ async function deleteCourse(idToDel) {
   <div class="flex-col border-2 justify-around border-red-600">
     <div class="bg-green-200">
       <input v-model="newCourse" type="text" class="bg-violet-100" />
+      <div>
+        <input
+          v-model="courseSetup"
+          type="radio"
+          id="courseconfig"
+          name="courseconfig"
+          value="18"
+        />
+        <label for="18">18</label>
+      </div>
+
+      <div>
+        <input
+          v-model="courseSetup"
+          type="radio"
+          id="courseconfig"
+          name="courseconfig"
+          value="9"
+        />
+        <label for="9">9</label>
+      </div>
       <button
         @click="post"
         v-if="isEditMode === false"
