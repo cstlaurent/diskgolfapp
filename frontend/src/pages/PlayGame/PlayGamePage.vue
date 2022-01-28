@@ -1,13 +1,13 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 
 const route = useRoute()
 const game = ref({})
 const playing = ref({})
 const gameId = route.params.id
 const savedGame = ref([])
+const currentHole = ref(1)
 
 async function getGameToPlay() {
   const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${gameId}`)
@@ -21,7 +21,10 @@ async function getGameToPlay() {
 function createPlaying() {
   const playingArr = []
   for (const player of game.value.players) {
-    player.score = { h1: 0, h2: 0, h3: 0 }
+    player.score = []
+    for (let i = 1; i <= game.value.course[0].setup; i++) {
+      player.score.push(`h${i}:0`)
+    }
 
     playingArr.push(player)
   }
@@ -55,8 +58,8 @@ onMounted(async () => {
   <br />
   <div>gameeeeeeee= {{ game }}</div>
   <div class="text-center">
-    <button>h1</button>
-    <button>h2</button>
+    <button @click="currentHole = 1">h1</button>
+    <button @click="currentHole = 2">h2</button>
     <button>h3</button>
     <button>h4</button>
     <button>h5</button>
@@ -72,8 +75,14 @@ onMounted(async () => {
           background-blend-mode: multiply;
         "
       >
-        <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
-          <div>{{}} {{ game.date }}</div>
+        <div
+          v-if="currentHole === 1"
+          class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10"
+        >
+          <div>
+            {{}} {{ game.date }}
+            <p>hole 1</p>
+          </div>
 
           <div
             v-for="players in playing"
@@ -97,8 +106,44 @@ onMounted(async () => {
             >
               Decrease Score
             </button>
-            <div v-for="points in players.score">
-              <p>{{ points }}</p>
+            <div>
+              <p>{{ players.score.h1 }}</p>
+              <h2 class="text-5xl">{{}}</h2>
+            </div>
+          </div>
+        </div>
+        <!-- ----------------------------------------h2 -->
+        <div
+          v-if="currentHole === 2"
+          class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10"
+        >
+          <div>
+            {{}} {{ game.date }}
+            <p>hole 2</p>
+          </div>
+
+          <div
+            v-for="players in playing"
+            class="basis-1/4 border-2 border-white rounded-lg"
+          >
+            <!-- /////PLAYER 1------------------------ -->
+
+            <h2>{{ players.name }}</h2>
+
+            <button
+              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
+              @click="players.score.h2++"
+            >
+              Increase Score
+            </button>
+            <button
+              class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
+              @click="players.score.h2--"
+            >
+              Decrease Score
+            </button>
+            <div>
+              <p>{{ players.score.h2 }}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
           </div>
