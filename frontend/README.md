@@ -118,5 +118,6 @@ display score pour trou selectionne
 (x)afficher setup dans course
 
 ()commencer api pour save game
-() devoir 18 pitons !!!!!!!!!!!!!!!!!!!!!! voir avec carl. TOUT BRISE
+(x) devoir 18 pitons !!!!!!!!!!!!!!!!!!!!!! voir avec carl. TOUT BRISE
 ()Afficher loading v-else
+()ajouter component playerCard

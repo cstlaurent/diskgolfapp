@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, h } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -13,6 +13,18 @@ async function getGameToPlay() {
   console.log('game', gamesResponse)
   const gameToPlay = await gamesResponse.json()
   return gameToPlay
+}
+
+function increaseScore(currentHole, player) {
+  let hHole = `h${currentHole}`
+  let selectedPlayer = player
+  selectedPlayer.score[hHole]++
+}
+
+function decreaseScore(currentHole, player) {
+  let hHole = `h${currentHole}`
+  let selectedPlayer = player
+  selectedPlayer.score[hHole]--
 }
 
 // function pour modifier game (avec score)
@@ -62,35 +74,24 @@ onMounted(async () => {
           background-blend-mode: multiply;
         "
       >
-        <div
-          v-if="currentHole === 1"
-          class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10"
-        >
-          <div>
-            {{ game?.course?.name || '' }} {{ game.date }}
-
-            <p>hole 1</p>
-          </div>
+        <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
+          <div>{{ game?.course?.name || '' }} {{ game.date }}</div>
 
           <div
             v-for="players in game.players"
             class="basis-1/4 border-2 border-white rounded-lg"
           >
-            <!-- /////PLAYER 1------------------------ -->
-            <!-- vfor -->
-
-            <!-- <h2>{{ playing?.player1?.name || '' }}</h2> -->
             <h2>{{ players.name }}</h2>
 
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click="players.score.h1++"
+              @click="increaseScore(currentHole, players)"
             >
               Increase Score
             </button>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click="players.score.h1--"
+              @click="decreaseScore(currentHole, players)"
             >
               Decrease Score
             </button>
