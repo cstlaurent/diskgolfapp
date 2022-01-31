@@ -39,10 +39,11 @@ export function addCourse(courseName, courseSetup) {
   return course
 }
 
-export function editCourse(idToEdit, courseName) {
+export function editCourse(idToEdit, courseName, setup) {
   const editedCourse = courses.find((course) => idToEdit === course.id)
   editedCourse.name = courseName
-  return courseName
+  editedCourse.setup = setup
+  return editedCourse
 }
 
 export function deleteCourse(id) {

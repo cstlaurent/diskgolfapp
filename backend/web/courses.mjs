@@ -41,7 +41,8 @@ function courseRoutes(app, options, done) {
       return 'Bad Data'
     }
     const courseName = request.body.name
-    const editedCourse = editCourse(requestedID, courseName)
+    const courseSetup = request.body.setup
+    const editedCourse = editCourse(requestedID, courseName, courseSetup)
 
     return { editedCourse: editedCourse }
   })

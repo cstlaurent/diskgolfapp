@@ -1,13 +1,12 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const game = ref({})
-const playing = ref({})
 const gameId = route.params.id
-const savedGame = ref([])
 const currentHole = ref(1)
+const holeSetup = ref('')
 
 async function getGameToPlay() {
   const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${gameId}`)
@@ -15,56 +14,41 @@ async function getGameToPlay() {
   const gameToPlay = await gamesResponse.json()
   return gameToPlay
 }
-// function pour modifier les players en playing players (avec score)
+
+// function pour modifier game (avec score)
 //dans un boucle
 
-function createPlaying() {
-  const playingArr = []
+function setupGame() {
+  game.value.course = game.value.course[0]
   for (const player of game.value.players) {
-    player.score = []
-    for (let i = 1; i <= game.value.course[0].setup; i++) {
-      player.score.push(`h${i}:0`)
+    player.score = {}
+    for (let i = 1; i <= holeSetup.value; i++) {
+      player.score[`h${i}`] = 0
     }
-
-    playingArr.push(player)
   }
-  return playingArr
 }
 
 onMounted(async () => {
   game.value = await getGameToPlay()
-  playing.value = createPlaying()
+  //Pull hole setup
+  holeSetup.value = game?.value?.course[0].setup
+  setupGame()
 })
-
-// //post une partie avec PLAYERID+SCORE+GAMEID  pour chaque players
-// function saveGame() {
-//   console.log('saved')
-//   for (const play of playing.value) {
-
-//     }
-//     console.log('testtesttest', playersaved)
-//   }
-//   // savedGame.value.push(game.value.players[0].score)
-// }
 </script>
 
 <template>
-  <!-- <div>GAME===={{ game }}</div>
-
-  <div>GAME.PLAYERS ===={{ game.players }}</div> -->
-  <div>PLAYING ===={{ playing }}</div>
-  <br />
-  <br />
-  <br />
-  <div>gameeeeeeee= {{ game }}</div>
-  <div class="text-center">
-    <button @click="currentHole = 1">h1</button>
-    <button @click="currentHole = 2">h2</button>
-    <button>h3</button>
-    <button>h4</button>
-    <button>h5</button>
-  </div>
-  <div class="w-screen bg-gray-200 flex flex-row p-3 mt-32 my-5">
+  <div>GAME= {{ game }}</div>
+  <!-- <div
+    v-for="(hole, key) in game.players[0].score"
+    class="text-center inline-flex"
+  >
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-10"
+    >
+      {{ key }}
+    </button>
+  </div> -->
+  <div class="w-screen bg-gray-200 flex flex-row p-3 my-5">
     <div class="mx-auto w-2/3">
       <!-- Profile Card -->
       <div
@@ -80,12 +64,13 @@ onMounted(async () => {
           class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10"
         >
           <div>
-            {{}} {{ game.date }}
+            {{ game?.course?.name || '' }} {{ game.date }}
+
             <p>hole 1</p>
           </div>
 
           <div
-            v-for="players in playing"
+            v-for="players in game.players"
             class="basis-1/4 border-2 border-white rounded-lg"
           >
             <!-- /////PLAYER 1------------------------ -->
@@ -107,9 +92,10 @@ onMounted(async () => {
               Decrease Score
             </button>
             <div>
-              <p>{{ players.score.h1 }}</p>
+              <p>{{}}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
+            <div>{{ players.score.h1 }}</div>
           </div>
         </div>
         <!-- ----------------------------------------h2 -->
@@ -123,7 +109,7 @@ onMounted(async () => {
           </div>
 
           <div
-            v-for="players in playing"
+            v-for="players in game.players"
             class="basis-1/4 border-2 border-white rounded-lg"
           >
             <!-- /////PLAYER 1------------------------ -->
@@ -153,11 +139,10 @@ onMounted(async () => {
   </div>
   <div>
     <button
-      @click="saveGame"
+      @click=""
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-52"
     >
       Save Game
     </button>
-    <p>{{ savedGame }}</p>
   </div>
 </template>

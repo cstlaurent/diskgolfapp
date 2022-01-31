@@ -111,7 +111,11 @@ Quand je save une game?
 player1 id + game id + player score
 player2 id + game id + player score
 
-devoir 18 pitons
 display score pour trou selectionne
 
-commencer api pour save game
+31-01
+(x)le score doit etre un obj et non array
+(x)afficher setup dans course
+
+()commencer api pour save game
+() devoir 18 pitons !!!!!!!!!!!!!!!!!!!!!! voir avec carl. TOUT BRISE
