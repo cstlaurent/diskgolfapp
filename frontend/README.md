@@ -119,3 +119,4 @@ display score pour trou selectionne
 
 ()commencer api pour save game
 () devoir 18 pitons !!!!!!!!!!!!!!!!!!!!!! voir avec carl. TOUT BRISE
+()Afficher loading v-else

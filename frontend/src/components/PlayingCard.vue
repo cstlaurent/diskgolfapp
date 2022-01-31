@@ -1,56 +1,6 @@
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-const game = ref({})
-const gameId = route.params.id
-const currentHole = ref(1)
-const holeSetup = ref(0)
-
-async function getGameToPlay() {
-  const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${gameId}`)
-  console.log('game', gamesResponse)
-  const gameToPlay = await gamesResponse.json()
-  return gameToPlay
-}
-
-// function pour modifier game (avec score)
-//dans un boucle
-
-function setupGame() {
-  game.value.course = game.value.course[0]
-  for (const player of game.value.players) {
-    player.score = {}
-    for (let i = 1; i <= holeSetup.value; i++) {
-      player.score[`h${i}`] = 0
-    }
-  }
-}
-
-onMounted(async () => {
-  game.value = await getGameToPlay()
-  //Pull hole setup
-  holeSetup.value = game?.value?.course[0].setup
-  setupGame()
-})
-</script>
+<script setup></script>
 
 <template>
-  <div>GAME= {{ game }}</div>
-
-  <div
-    v-if="game.players?.[0]"
-    v-for="hole in holeSetup"
-    class="text-center inline-flex"
-  >
-    <button
-      @click="currentHole = hole"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-10"
-    >
-      {{ hole }}
-    </button>
-  </div>
   <div class="w-screen bg-gray-200 flex flex-row p-3 my-5">
     <div class="mx-auto w-2/3">
       <!-- Profile Card -->
@@ -104,8 +54,5 @@ onMounted(async () => {
         <!-- ----------------------------------------h2 -->
       </div>
     </div>
-  </div>
-  <div>
-    {{ currentHole }}
   </div>
 </template>
