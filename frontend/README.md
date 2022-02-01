@@ -122,7 +122,7 @@ display score pour trou selectionne
 # 1-02-22
 
 - afficher score tu trou selectionne
-- ajouter component playerCard
+- DONE ajouter component playerCard
 - commencer api pour save game
 
 # A FAIRE UN JOUR

@@ -5,11 +5,21 @@ const props = defineProps({
   currentHole: Number,
   hHole: String,
 })
+
+function increaseScore(currentHole, players) {
+  emit('scoreincreased', currentHole, players)
+}
+
+function decreaseScore(currentHole, players) {
+  emit('scoredecreased', currentHole, players)
+}
+const emit = defineEmits({
+  scoreincreased: null,
+  scoredecreased: null,
+})
 </script>
 
 <template>
-  <div>{{ props }}</div>
-
   <div class="w-screen bg-gray-200 flex flex-row p-3 my-5">
     <div class="mx-auto w-2/3">
       <!-- Profile Card -->
@@ -38,13 +48,13 @@ const props = defineProps({
 
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800 mt-8"
-              @click="increaseScore(props.currentHole, players)"
+              @click="$emit(increaseScore(props.currentHole, players))"
             >
               Increase Score
             </button>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click="decreaseScore(props.currentHole, players)"
+              @click="$emit(decreaseScore(props.currentHole, players))"
             >
               Decrease Score
             </button>
@@ -52,7 +62,7 @@ const props = defineProps({
               <p>{{}}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
-            <div class="text-4xl text-center mt-6">
+            <div class="text-4xl text-center mt-3">
               {{ players.score[hHole] }}
             </div>
           </div>

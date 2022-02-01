@@ -65,7 +65,13 @@ onMounted(async () => {
       {{ hole }}
     </button>
   </div>
-  <PlayingCard />
+  <PlayingCard
+    @scoreincreased="increaseScore"
+    @scoredecreased="decreaseScore"
+    :game="game"
+    :current-hole="currentHole"
+    :hHole="hHole"
+  />
 
   <div>{{ hHole }}</div>
 </template>
