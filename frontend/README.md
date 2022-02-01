@@ -60,39 +60,40 @@ DEVOIR 2:
 
 Devoir 3:
 
--players create edit delete fully working (back et front)
--courses create edit delete fully working (back et front)
--game page dropdown pour selection player/courses et date ajd default
--players doit pouvoir accepter plusieurs et (radio checkbox liste)
+- players create edit delete fully working (back et front)
+- courses create edit delete fully working (back et front)
+- game page dropdown pour selection player/courses et date ajd default
+- players doit pouvoir accepter plusieurs et (radio checkbox liste)
 
 Devoir 4:
--clean up backend
--2 folder
-1 db
-1 web
+
+- clean up backend
+- 2 folder
 
 splitter database
 
 Devoir 5 :
--filtre sur la liste de players
--SEARCH ?????
+
+- filtre sur la liste de players
+- SEARCH
 
 DB - knex.js
 sq lite
 
 Devoir 6 :
-Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete si missclick
+
+- Quand je click sur un player ajouter a un liste qui s'affiche et pouvoir delete si missclick
 
 TODO
--Ajouter les autres fonctions a api
 
-A VOIR page play
+- Ajouter les autres fonctions a api
 
 La page doit:
--commencer sur hole 1 et basculer les autres.
--increase/decrease le nombe de coups
--afficher nom du course en haut
--avoir un boutton back to games?
+
+- commencer sur hole 1 et basculer les autres.
+- increase/decrease le nombe de coups
+- afficher nom du course en haut
+- avoir un boutton back to games?
 
 On mounted on doit creer des playingP pour garder modifier players(ajout score)
 
@@ -107,18 +108,23 @@ DEVOIR 7 25 01
 api avec body???
 
 Quand je save une game?
--creer objet avec
+creer objet avec
 player1 id + game id + player score
 player2 id + game id + player score
 
 display score pour trou selectionne
 
-31-01
-(x)le score doit etre un obj et non array
-(x)afficher setup dans course
+# 31-01
 
-1-02-22
-(x)afficher score tu trou selectionne
-()commencer api pour save game
-()Afficher loading v-else
-()ajouter component playerCard
+- le score doit etre un obj et non array
+- afficher setup dans course
+
+# 1-02-22
+
+- afficher score tu trou selectionne
+- ajouter component playerCard
+- commencer api pour save game
+
+# A FAIRE UN JOUR
+
+- Afficher loading v-else
