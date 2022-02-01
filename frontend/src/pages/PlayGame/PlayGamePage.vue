@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, h } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -7,7 +7,7 @@ const game = ref({})
 const gameId = route.params.id
 const currentHole = ref(1)
 const holeSetup = ref(0)
-
+const hHole = ref('')
 async function getGameToPlay() {
   const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${gameId}`)
   console.log('game', gamesResponse)
@@ -57,7 +57,7 @@ onMounted(async () => {
     class="text-center inline-flex"
   >
     <button
-      @click="currentHole = hole"
+      @click=";(currentHole = hole), (hHole = 'h' + hole)"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-10"
     >
       {{ hole }}
@@ -75,7 +75,10 @@ onMounted(async () => {
         "
       >
         <div class="text-white ml-10 flex flex-row grid-cols-4 h-60 gap-10">
-          <div>{{ game?.course?.name || '' }} {{ game.date }}</div>
+          <div class="text-xl font-bold">
+            {{ game?.course?.name || '' }} {{ game.date }}
+            <p class="text-7xl mt-10">{{ currentHole }}</p>
+          </div>
 
           <div
             v-for="players in game.players"
@@ -99,14 +102,12 @@ onMounted(async () => {
               <p>{{}}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
-            <div>{{ players.score.h1 }}</div>
+            <div>{{ players.score[hHole] }}</div>
           </div>
         </div>
         <!-- ----------------------------------------h2 -->
       </div>
     </div>
   </div>
-  <div>
-    {{ currentHole }}
-  </div>
+  <div>{{ hHole }}</div>
 </template>

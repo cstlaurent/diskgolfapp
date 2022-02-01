@@ -117,7 +117,8 @@ display score pour trou selectionne
 (x)le score doit etre un obj et non array
 (x)afficher setup dans course
 
+1-02-22
+(x)afficher score tu trou selectionne
 ()commencer api pour save game
-(x) devoir 18 pitons !!!!!!!!!!!!!!!!!!!!!! voir avec carl. TOUT BRISE
 ()Afficher loading v-else
 ()ajouter component playerCard
