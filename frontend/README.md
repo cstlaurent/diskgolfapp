@@ -110,7 +110,6 @@ api avec body???
 Quand je save une game?
 creer objet avec
 player1 id + game id + player score
-player2 id + game id + player score
 
 display score pour trou selectionne
 

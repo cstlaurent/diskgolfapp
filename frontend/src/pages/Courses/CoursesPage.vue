@@ -12,7 +12,7 @@ onMounted(async () => {
 })
 
 async function post() {
-  console.log(courseSetup.value)
+ 
 
   if (isEditMode.value === false) {
     const newC = {
