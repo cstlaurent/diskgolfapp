@@ -12,8 +12,6 @@ onMounted(async () => {
 })
 
 async function post() {
- 
-
   if (isEditMode.value === false) {
     const newC = {
       name: newCourse.value,
@@ -32,7 +30,7 @@ async function post() {
 
     const modifiedCourse = {
       name: newCourse.value,
-      setup : courseSetup.value
+      setup: courseSetup.value,
     }
     const body = JSON.stringify(modifiedCourse)
     const coursesResponse = await fetch(
@@ -71,7 +69,7 @@ async function deleteCourse(idToDel) {
     <div class="">
       <h1 class="text-center font-bold text-4xl">COURSE PAGE</h1>
     </div>
-    <div class="bg-green-200 pl-24">
+    <div class="pl-24 py-20 flex bg-yellow-100">
       <div class="border-2 border-blue-400 w-64 h-48 rounded-lg">
         <input class="mt-7" v-model="newCourse" type="text" />
 
@@ -109,24 +107,29 @@ async function deleteCourse(idToDel) {
           Save
         </button>
       </div>
+      <div
+        class="bg-blue-100 border-2 border-blue-400 rounded-xl text-xl w-1/3 "
+      >
+        <table class="">
+          <th>course</th>
+          <th></th>
+          <th></th>
+          <tr v-for="(c, id) in courses">
+            <td class="px-10">
+              {{ c.name }}
+            </td>
+            <tr><td class="px-10">{{c.setup}}</td></tr>
+            <td class="bg-pink-200 px-10">
+              <button @click="deleteCourse(c.id)" class="">DELETE</button>
+            </td>
+            <td class="px-10">
+              <button @click="editCourse(c.id)" class="">EDIT</button>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div class="bg-yellow-200">
-      <table class="border-2 border-blue-600">
-        <th>course</th>
-        <th></th>
-        <th></th>
-        <tr v-for="(c, id) in courses">
-          <td class="">
-            {{ c.name }}
-            <td>{{c.setup}}</td>
-          </td>
-          <td>
-            <button @click="deleteCourse(c.id)" class="">DELETE</button>
-          </td>
-          <td><button @click="editCourse(c.id)" class="">EDIT</button></td>
-        </tr>
-      </table>
-    </div>
+    <div class="bg-yellow-200"></div>
     <div class="bg-pink-200"><p>test</p></div>
     <div class="bg-green-200"><p>test</p></div>
     <div class="bg-red-200"><p>test</p></div>

@@ -17,16 +17,38 @@ async function getGameToPlay() {
   return gameToPlay
 }
 
-function increaseScore(currentHole, player) {
+async function saveScore(playerId, hole, score, gameId) {
+  const saveScoreBody = {
+    playerId: playerId,
+    hole: hole,
+    score: score,
+    gameId: gameId,
+  }
+  const body = JSON.stringify(saveScoreBody)
+  const scoreResponse = await fetch(
+    `http://127.0.0.1:7778/game/${gameId}/score`,
+    {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    }
+  )
+}
+
+async function increaseScore(currentHole, player) {
   let hHole = `h${currentHole}`
   let selectedPlayer = player
   selectedPlayer.score[hHole]++
+  // await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
-function decreaseScore(currentHole, player) {
+async function decreaseScore(currentHole, player) {
   let hHole = `h${currentHole}`
   let selectedPlayer = player
   selectedPlayer.score[hHole]--
+  // await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
 // function pour modifier game (avec score)
@@ -74,4 +96,6 @@ onMounted(async () => {
   />
 
   <div>{{ hHole }}</div>
+
+  `
 </template>

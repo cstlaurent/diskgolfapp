@@ -124,6 +124,10 @@ display score pour trou selectionne
 - DONE ajouter component playerCard
 - commencer api pour save game
 
+# 03-02-22
+
+- api post score
+
 # A FAIRE UN JOUR
 
 - Afficher loading v-else
