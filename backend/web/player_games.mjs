@@ -1,11 +1,17 @@
-import { getPlayerGames, saveGame } from '../db/player_games.mjs'
+import { getPlayerGames, getPlayerGame, saveGame } from '../db/player_games.mjs'
 
 function playerGamesRoutes(app, options, done) {
   // Get games
   app.get('/playergames', async (request, reply) => {
     return { playergames: getPlayerGames() }
   })
-  done()
+
+  //get specific games
+  app.get('/playergames/:id', async (request, reply) => {
+    const requestedID = request.params.id
+    let requestedPlayerGame = getPlayerGame(requestedID)
+    return requestedPlayerGame
+  })
 
   app.post('/game/:id/score', async (request, reply) => {
     if (!request.body) {
@@ -20,5 +26,7 @@ function playerGamesRoutes(app, options, done) {
     const savedGame = saveGame(playerId, hole, playerScore, gameId)
     return { savedGame: savedGame }
   })
+
+  done()
 }
 export default playerGamesRoutes

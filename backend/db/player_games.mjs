@@ -1,35 +1,51 @@
 const playerGames = [
-  {
-    gameId: 'gfhfg',
-    hole: 1,
-    score: 0,
-    playerId: 'ghjgjhhj',
-  },
-  {
-    gameId: 'gjvgjh',
-    hole: 2,
-    score: 2,
-    playerId: 'fghk',
-  },
+  // {
+  //   gameId: '9uD4mOkk-pTo9HqrDagz-',
+  //   hole: 1,
+  //   score: 0,
+  //   playerId: '-JNsUyQ0E7Hiujjx5icG-',
+  // },
+  // {
+  //   gameId: 'gjvgjh',
+  //   hole: 2,
+  //   score: 2,
+  //   playerId: 'fghk',
+  // },
 ]
 
 export function getPlayerGames() {
   return playerGames
 }
 
-//je dois filter si il y a deja le score du trou. seulement remplacer. IF PLAYER ID  || GAME ID
+export function getPlayerGame(pgid) {
+  for (let game of playerGames) {
+    if (game.gameId === pgid) {
+      return game
+    }
+  }
+}
+
 export function saveGame(playerId, hole, score, gameId) {
+  let found = false
   const savedGame = {
+    gameId: gameId,
     playerId: playerId,
     hole: hole,
     score: score,
-    gameId: gameId,
   }
-
-  playerGames.push(savedGame)
-
-  for (const game of playerGames) {
-    console.log(game.gameId)
+  for (let game of playerGames) {
+    if (
+      game.gameId === gameId &&
+      game.playerId === playerId &&
+      game.hole === hole
+    ) {
+      game.score = score
+      found = true
+      break
+    }
+  }
+  if (found === false) {
+    playerGames.push(savedGame)
   }
 
   return savedGame
