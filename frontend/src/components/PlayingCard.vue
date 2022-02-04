@@ -48,13 +48,13 @@ const emit = defineEmits({
 
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800 mt-8"
-              @click="$emit(increaseScore(props.currentHole, players))"
+              @click="increaseScore(props.currentHole, players)"
             >
               Increase Score
             </button>
             <button
               class="bg-gray-500 rounded-t-lg hover:bg-gray-800"
-              @click="$emit(decreaseScore(props.currentHole, players))"
+              @click="decreaseScore(props.currentHole, players)"
             >
               Decrease Score
             </button>

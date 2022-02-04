@@ -7,7 +7,7 @@ function playerGamesRoutes(app, options, done) {
   })
   done()
 
-  app.post('/playergames', async (request, reply) => {
+  app.post('/game/:id/score', async (request, reply) => {
     if (!request.body) {
       reply.statusCode = 400
       return 'Bad Data'
@@ -15,8 +15,9 @@ function playerGamesRoutes(app, options, done) {
     const playerId = request.body.playerId
     const hole = request.body.hole
     const playerScore = request.body.score
+    const gameId = request.body.gameId
 
-    const savedGame = saveGame(playerId, hole, playerScore)
+    const savedGame = saveGame(playerId, hole, playerScore, gameId)
     return { savedGame: savedGame }
   })
 }

@@ -41,14 +41,14 @@ async function increaseScore(currentHole, player) {
   let hHole = `h${currentHole}`
   let selectedPlayer = player
   selectedPlayer.score[hHole]++
-  // await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
+  await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
 async function decreaseScore(currentHole, player) {
   let hHole = `h${currentHole}`
   let selectedPlayer = player
   selectedPlayer.score[hHole]--
-  // await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
+  await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
 // function pour modifier game (avec score)
