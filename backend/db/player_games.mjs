@@ -18,11 +18,15 @@ export function getPlayerGames() {
 }
 
 export function getPlayerGame(pgid) {
+  let pgArray = []
+
   for (let game of playerGames) {
+    console.log(pgid)
     if (game.gameId === pgid) {
-      return game
+      pgArray.push(game)
     }
   }
+  return pgArray
 }
 
 export function saveGame(playerId, hole, score, gameId) {
