@@ -21,7 +21,6 @@ export function getPlayerGame(pgid) {
   let pgArray = []
 
   for (let game of playerGames) {
-    console.log(pgid)
     if (game.gameId === pgid) {
       pgArray.push(game)
     }
@@ -53,4 +52,17 @@ export function saveGame(playerId, hole, score, gameId) {
   }
 
   return savedGame
+}
+
+export function getSpecificScore(ScoreParams) {
+  console.log(game.score, 'OK OK OKOKOKOK')
+  for (const game of playerGames) {
+    if (
+      game.gameId === ScoreParams.gameId &&
+      game.playerId === ScoreParams.playerId &&
+      game.hole === ScoreParams.hole
+    ) {
+      return game.score
+    }
+  }
 }

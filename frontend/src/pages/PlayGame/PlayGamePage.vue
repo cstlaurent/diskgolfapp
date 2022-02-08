@@ -26,13 +26,26 @@ async function saveScore(playerId, hole, score, gameId) {
   }
   const body = JSON.stringify(saveScoreBody)
   const scoreResponse = await fetch(
-    `http://127.0.0.1:7778/game/${gameId}/score`,
+    `http://127.0.0.1:7778/playergames/${gameId}/score`,
     {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
+
       body: body,
+    }
+  )
+}
+
+async function getScore(playerId, hole, gameId) {
+  const scoreResponse = await fetch(
+    `http://127.0.0.1:7778/game/${gameId}/${playerId}/${hole}/score`,
+    {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   )
 }
@@ -51,9 +64,7 @@ async function decreaseScore(currentHole, player) {
   await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
-// function pour modifier game (avec score)
-//dans un boucle
-
+// je dois setup en utilisant mon get
 function setupGame() {
   game.value.course = game.value.course[0]
   for (const player of game.value.players) {
