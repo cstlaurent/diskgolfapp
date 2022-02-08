@@ -40,7 +40,7 @@ async function saveScore(playerId, hole, score, gameId) {
 
 async function getScore(playerId, hole, gameId) {
   const scoreResponse = await fetch(
-    `http://127.0.0.1:7778/game/${gameId}/${playerId}/${hole}/score`,
+    `http://127.0.0.1:7778/playergames/${gameId}/${playerId}/${hole}/score`,
     {
       method: 'get',
       headers: {
@@ -48,6 +48,8 @@ async function getScore(playerId, hole, gameId) {
       },
     }
   )
+  const requestedScore = await scoreResponse.json()
+  console.log(requestedScore)
 }
 
 async function increaseScore(currentHole, player) {
@@ -107,6 +109,11 @@ onMounted(async () => {
   />
 
   <div>{{ hHole }}</div>
-
-  `
+  <div>
+    <button
+      @click="getScore('-JNsUyQ0E7Hiujjx5icG-', 1, 'D5WEOVa-VyRwePcJbKF9V')"
+    >
+      GET SCOREE
+    </button>
+  </div>
 </template>

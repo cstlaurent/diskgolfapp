@@ -55,14 +55,13 @@ export function saveGame(playerId, hole, score, gameId) {
 }
 
 export function getSpecificScore(ScoreParams) {
-  console.log(game.score, 'OK OK OKOKOKOK')
-  for (const game of playerGames) {
+  for (const score of playerGames) {
     if (
-      game.gameId === ScoreParams.gameId &&
-      game.playerId === ScoreParams.playerId &&
-      game.hole === ScoreParams.hole
+      score.gameId === ScoreParams.gameId &&
+      score.playerId === ScoreParams.playerId &&
+      score.hole === Number(ScoreParams.hole)
     ) {
-      return game.score
+      return score.score
     }
   }
 }
