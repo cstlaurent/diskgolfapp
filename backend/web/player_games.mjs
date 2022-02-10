@@ -41,6 +41,7 @@ function playerGamesRoutes(app, options, done) {
         gameId: request.params.gameid,
       }
       let requestedScore = getSpecificScore(ScoreParams)
+
       return requestedScore
     }
   )

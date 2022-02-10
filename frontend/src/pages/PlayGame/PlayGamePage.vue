@@ -9,6 +9,7 @@ const gameId = route.params.id
 const currentHole = ref(1)
 const holeSetup = ref(0)
 const hHole = ref('h1')
+const specificScore = ref(0)
 
 async function getGameToPlay() {
   const gamesResponse = await fetch(`http://127.0.0.1:7778/game/${gameId}`)
@@ -36,20 +37,6 @@ async function saveScore(playerId, hole, score, gameId) {
       body: body,
     }
   )
-}
-
-async function getScore(playerId, hole, gameId) {
-  const scoreResponse = await fetch(
-    `http://127.0.0.1:7778/playergames/${gameId}/${playerId}/${hole}/score`,
-    {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-  const requestedScore = await scoreResponse.json()
-  console.log(requestedScore)
 }
 
 async function increaseScore(currentHole, player) {
@@ -106,12 +93,13 @@ onMounted(async () => {
     :game="game"
     :current-hole="currentHole"
     :hHole="hHole"
+    :specific-score="specificScore"
   />
 
   <div>{{ hHole }}</div>
   <div>
     <button
-      @click="getScore('-JNsUyQ0E7Hiujjx5icG-', 1, 'D5WEOVa-VyRwePcJbKF9V')"
+      @click="getScore('-JNsUyQ0E7Hiujjx5icG-', 1, 'YdFZPHCB-nbJjI96dRdoz')"
     >
       GET SCOREE
     </button>

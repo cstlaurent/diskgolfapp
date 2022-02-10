@@ -124,10 +124,9 @@ display score pour trou selectionne
 - DONE ajouter component playerCard
 - commencer api pour save game
 
-# 07-02-22
+# 10-02-22
 
-- brancher scoore avec backend playerGames
-  -afficher score updaté
+-afficher score updaté
 
 # A FAIRE UN JOUR
 

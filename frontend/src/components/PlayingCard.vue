@@ -5,7 +5,24 @@ const props = defineProps({
   currentHole: Number,
   hHole: String,
 })
+let specificScore = ref()
 
+async function getScore(playerId, hole, gameId) {
+  const scoreResponse = await fetch(
+    `http://127.0.0.1:7778/playergames/${gameId}/${playerId}/${hole}/score`,
+    {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  const requestedScore = await scoreResponse.json()
+  console.log(requestedScore)
+
+  specificScore.value = requestedScore
+  return requestedScore
+}
 function increaseScore(currentHole, players) {
   emit('scoreincreased', currentHole, players)
 }
@@ -59,11 +76,16 @@ const emit = defineEmits({
               Decrease Score
             </button>
             <div>
-              <p>{{}}</p>
               <h2 class="text-5xl">{{}}</h2>
             </div>
             <div class="text-4xl text-center mt-3">
-              {{ players.score[hHole] }}
+              <!-- je dois utiliser ma fonction get specific -->
+              <!-- {{ players.score[hHole] }} -->
+              {{ getScore(players.id, currentHole, props.game.id) }}
+
+              <!-- {{ players.id }} test -->
+              <!-- {{ props.game.id }} -->
+              <!-- {{ currentHole }} -->
             </div>
           </div>
         </div>
