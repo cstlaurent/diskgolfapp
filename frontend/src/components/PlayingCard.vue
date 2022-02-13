@@ -5,7 +5,7 @@ const props = defineProps({
   currentHole: Number,
   hHole: String,
 })
-let specificScore = ref()
+const specificScore = ref()
 
 async function getScore(playerId, hole, gameId) {
   const scoreResponse = await fetch(
@@ -18,8 +18,7 @@ async function getScore(playerId, hole, gameId) {
     }
   )
   const requestedScore = await scoreResponse.json()
-  console.log(requestedScore)
-
+  console.log('requested score=== ', requestedScore)
   specificScore.value = requestedScore
   return requestedScore
 }
@@ -81,7 +80,7 @@ const emit = defineEmits({
             <div class="text-4xl text-center mt-3">
               <!-- je dois utiliser ma fonction get specific -->
               <!-- {{ players.score[hHole] }} -->
-              {{ getScore(players.id, currentHole, props.game.id) }}
+              <!-- {{ getScore(players.id, currentHole, props.game.id) }} -->
 
               <!-- {{ players.id }} test -->
               <!-- {{ props.game.id }} -->
