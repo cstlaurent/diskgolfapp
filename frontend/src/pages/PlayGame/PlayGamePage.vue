@@ -18,57 +18,10 @@ async function getGameToPlay() {
   return gameToPlay
 }
 
-async function saveScore(playerId, hole, score, gameId) {
-  const saveScoreBody = {
-    playerId: playerId,
-    hole: hole,
-    score: score,
-    gameId: gameId,
-  }
-  const body = JSON.stringify(saveScoreBody)
-  const scoreResponse = await fetch(
-    `http://127.0.0.1:7778/playergames/${gameId}/score`,
-    {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-
-      body: body,
-    }
-  )
-}
-
-async function increaseScore(currentHole, player) {
-  let hHole = `h${currentHole}`
-  let selectedPlayer = player
-  selectedPlayer.score[hHole]++
-  await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
-}
-
-async function decreaseScore(currentHole, player) {
-  let hHole = `h${currentHole}`
-  let selectedPlayer = player
-  selectedPlayer.score[hHole]--
-  await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
-}
-
-// // je dois setup en utilisant mon get
-// function setupGame() {
-//   game.value.course = game.value.course[0]
-//   for (const player of game.value.players) {
-//     player.score = {}
-//     for (let i = 1; i <= holeSetup.value; i++) {
-//       player.score[`h${i}`] = 0
-//     }
-//   }
-// }
-
 onMounted(async () => {
   game.value = await getGameToPlay()
   //Pull hole setup
   holeSetup.value = game?.value?.course.setup
-  //setupGame()
 })
 </script>
 
@@ -88,8 +41,6 @@ onMounted(async () => {
     </button>
   </div>
   <PlayingCard
-    @scoreincreased="increaseScore"
-    @scoredecreased="decreaseScore"
     :game="game"
     :current-hole="currentHole"
     :hHole="hHole"
