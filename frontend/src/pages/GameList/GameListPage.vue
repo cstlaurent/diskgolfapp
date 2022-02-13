@@ -18,7 +18,7 @@ const editedGameid = ref('')
 const players = ref([])
 const courses = ref([])
 const selectedPlayers = ref([])
-const selectedCourse = ref([])
+const selectedCourse = ref(null)
 const date = ref(currentDate())
 
 function currentDate() {
@@ -37,7 +37,7 @@ function playerSelected(player) {
   selectedPlayers.value.push(player)
 }
 function courseSelected(course) {
-  selectedCourse.value.splice(0, 1, course)
+  selectedCourse.value = course
 }
 async function deleteSelectedPlayer(player) {
   selectedPlayers.value.splice(player.id, 1)
@@ -94,26 +94,26 @@ function editGame(id) {
 
 <template>
   <div
-    class="flex-col border-4 border-blue-400 bg-blue-100 rounded-2xl p-5 mt-24 w-5/12 mx-auto"
+    class="mx-auto mt-24 w-5/12 flex-col rounded-2xl border-4 border-blue-400 bg-blue-100 p-5"
   >
     <form class="flex-1" @submit.prevent="addGame">
-      <div class="flex-1 mt-10 z-20">
-        <label for="players" class="w-20 mr-10 text-xl font-bold"
+      <div class="z-20 mt-10 flex-1">
+        <label for="players" class="mr-10 w-20 text-xl font-bold"
           >Players:</label
         >
         <dropdownPlayer @playerSelected="playerSelected" :players="players" />
       </div>
       <br />
       <div class="z-10">
-        <label for="course" class="w-20 mr-10 text-xl font-bold">Course:</label>
+        <label for="course" class="mr-10 w-20 text-xl font-bold">Course:</label>
         <dropdownCourse @courseSelected="courseSelected" :courses="courses" />
       </div>
       <br />
     </form>
-    <table class="bg-blue-200 mt-24 mx-auto">
-      <tr class="font-bold text-xl border-2 border-blue-500">
+    <table class="mx-auto mt-24 bg-blue-200">
+      <tr class="border-2 border-blue-500 text-xl font-bold">
         <th>Players</th>
-        <th v-for="course in selectedCourse">{{ course.name }}</th>
+        <th v-if="selectedCourse">{{ selectedCourse.name }}</th>
         <th>{{ date }}</th>
       </tr>
 
@@ -126,7 +126,7 @@ function editGame(id) {
         <td class="flex">
           <button
             @click="deleteSelectedPlayer"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 m-3"
+            class="m-3 w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
           >
             DELETE
           </button>
@@ -135,16 +135,16 @@ function editGame(id) {
     </table>
     <button
       @click="addGame"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20 h-20 m-3"
+      class="m-3 h-20 w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
     >
       CREATE GAME
     </button>
   </div>
 
-  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
-    <tr class="font-bold text-xl">
+  <table class="mx-auto mt-24 w-5/12 border-2 border-blue-500 bg-blue-100">
+    <tr class="text-xl font-bold">
       <th>Players</th>
-      <th>Course</th>
+      <th v-if="course">Course</th>
       <th>Date</th>
 
       <th></th>
@@ -152,12 +152,12 @@ function editGame(id) {
 
     <tr v-for="(game, id) in savedGames" class="border-2 border-blue-200">
       <td v-for="player in game.players">{{ player.name }}</td>
-      <td v-for="course in game.course">{{ course.name }}</td>
+      <td v-if="game.course">{{ game.course.name }}</td>
       <td>{{ date }}</td>
 
       <td class="flex gap-2">
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+          class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
           @click="deleteGame(id)"
         >
           DELETE
@@ -165,7 +165,7 @@ function editGame(id) {
         <div>
           <router-link
             :to="`/PlayGame/${game.id}`"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
+            class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
             >playgame</router-link
           >
         </div>

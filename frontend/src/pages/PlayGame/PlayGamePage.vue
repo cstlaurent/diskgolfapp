@@ -53,22 +53,22 @@ async function decreaseScore(currentHole, player) {
   await saveScore(player.id, currentHole, selectedPlayer.score[hHole], gameId)
 }
 
-// je dois setup en utilisant mon get
-function setupGame() {
-  game.value.course = game.value.course[0]
-  for (const player of game.value.players) {
-    player.score = {}
-    for (let i = 1; i <= holeSetup.value; i++) {
-      player.score[`h${i}`] = 0
-    }
-  }
-}
+// // je dois setup en utilisant mon get
+// function setupGame() {
+//   game.value.course = game.value.course[0]
+//   for (const player of game.value.players) {
+//     player.score = {}
+//     for (let i = 1; i <= holeSetup.value; i++) {
+//       player.score[`h${i}`] = 0
+//     }
+//   }
+// }
 
 onMounted(async () => {
   game.value = await getGameToPlay()
   //Pull hole setup
-  holeSetup.value = game?.value?.course[0].setup
-  setupGame()
+  holeSetup.value = game?.value?.course.setup
+  //setupGame()
 })
 </script>
 
@@ -78,11 +78,11 @@ onMounted(async () => {
   <div
     v-if="game.players?.[0]"
     v-for="hole in holeSetup"
-    class="text-center inline-flex"
+    class="inline-flex text-center"
   >
     <button
       @click=";(currentHole = hole), (hHole = 'h' + hole)"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-full w-10"
+      class="w-10 rounded-full bg-blue-500 py-2 font-bold text-white hover:bg-blue-700"
     >
       {{ hole }}
     </button>

@@ -42,7 +42,7 @@ function playerGamesRoutes(app, options, done) {
       }
       let requestedScore = getSpecificScore(ScoreParams)
 
-      return requestedScore
+      return requestedScore || 0
     }
   )
 
