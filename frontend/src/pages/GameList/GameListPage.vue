@@ -94,7 +94,7 @@ function editGame(id) {
 
 <template>
   <div
-    class="mx-auto mt-24 w-5/12 flex-col rounded-2xl border-4 border-blue-400 bg-blue-100 p-5"
+    class="mx-auto mt-24 max-w-md flex-col rounded-2xl border-4 border-blue-400 bg-blue-100 p-5"
   >
     <form class="flex-1" @submit.prevent="addGame">
       <div class="z-20 mt-10 flex-1">
@@ -144,7 +144,7 @@ function editGame(id) {
   <table class="mx-auto mt-24 w-5/12 border-2 border-blue-500 bg-blue-100">
     <tr class="text-xl font-bold">
       <th>Players</th>
-      <th v-if="course">Course</th>
+      <th>Course</th>
       <th>Date</th>
 
       <th></th>
