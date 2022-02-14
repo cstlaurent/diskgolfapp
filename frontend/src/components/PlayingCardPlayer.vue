@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 const props = defineProps({
   gameId: String,
   hole: Number,
@@ -10,6 +10,13 @@ const specificScore = ref()
 onMounted(async () => {
   await getScore(props.player.id, props.hole, props.gameId)
 })
+
+watch(
+  () => props?.hole,
+  (last, newHole) => {
+    if (last !== newHole) getScore(props.player.id, props.hole, props.gameId)
+  }
+)
 
 async function saveScore(playerId, hole, score, gameId) {
   const saveScoreBody = {
@@ -43,7 +50,7 @@ async function getScore(playerId, hole, gameId) {
     }
   )
   const requestedScore = await scoreResponse.json()
-  console.log('requested score=== ', requestedScore)
+
   specificScore.value = requestedScore
   return requestedScore
 }

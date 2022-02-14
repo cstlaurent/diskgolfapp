@@ -48,11 +48,5 @@ onMounted(async () => {
   />
 
   <div>{{ hHole }}</div>
-  <div>
-    <button
-      @click="getScore('-JNsUyQ0E7Hiujjx5icG-', 1, 'YdFZPHCB-nbJjI96dRdoz')"
-    >
-      GET SCOREE
-    </button>
-  </div>
+  <div></div>
 </template>

@@ -124,9 +124,10 @@ display score pour trou selectionne
 - DONE ajouter component playerCard
 - commencer api pour save game
 
-# 10-02-22
+# 14-02-22
 
--afficher score updaté
+- menage pour tout mettre en flexbox
+  -regler score pour chaque trou DONE (watch)
 
 # A FAIRE UN JOUR
 
