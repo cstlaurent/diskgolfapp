@@ -71,7 +71,7 @@ async function deletePlayer(idToDel) {
         class="m-10 mx-auto rounded-lg border-2 border-blue-400 bg-blue-100 p-4"
       >
         <input
-          class="m-4"
+          class="m-3"
           type="text"
           placeholder="Player Name"
           name="Addplayer"
@@ -80,38 +80,33 @@ async function deletePlayer(idToDel) {
         <button
           @click="post"
           v-if="isEditMode === false"
-          class="mx-8 rounded-full bg-blue-500 py-2 px-2 font-bold text-white hover:bg-blue-700"
+          class="ml-24 rounded-lg bg-blue-400 py-2 px-2 font-bold text-white hover:bg-blue-600"
         >
           Add Player
         </button>
         <button
           @click="post"
           v-else
-          class="mx-8 rounded-full bg-blue-500 py-2 px-10 font-bold text-white hover:bg-blue-700"
+          class="mx-8 rounded-lg bg-blue-400 py-2 px-10 font-bold text-white hover:bg-blue-600"
         >
           Save
         </button>
       </div>
     </div>
 
-    <table class="mx-auto mt-24 w-5/12 border-2 border-blue-500 bg-blue-100">
-      <tr class="text-xl font-bold">
-        <th>Players</th>
-        <th></th>
-      </tr>
-
+    <table class="mx-auto mt-24 border-2 bg-blue-100">
       <tr :key="pl.id" v-for="pl in players" class="border-2 border-blue-200">
         <td>{{ pl.name }}</td>
 
         <td class="ml-64 flex gap-2">
           <button
-            class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
+            class="rounded-lg bg-blue-400 font-bold text-white hover:bg-blue-600"
             @click="deletePlayer(pl.id)"
           >
             DELETE
           </button>
           <button
-            class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
+            class="rounded-lg bg-blue-400 px-5 py-2 font-bold text-white hover:bg-blue-600"
             @click="editPlayer(pl.id)"
           >
             Edit

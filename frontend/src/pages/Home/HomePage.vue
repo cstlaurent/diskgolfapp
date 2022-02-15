@@ -5,6 +5,10 @@ import stats from './Stats.vue'
 </script>
 
 <template>
+  <h1 class="font-Oswald pt-10 text-center text-5xl font-bold">
+    AWESOME DISC GOLF APP
+  </h1>
+
   <div>
     <div></div>
 

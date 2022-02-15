@@ -69,8 +69,8 @@ async function deleteCourse(idToDel) {
     <div class="">
       <h1 class="text-center font-bold text-5xl pt-10 font-Oswald ">COURSES</h1>
     </div>
-    <div class="pl-24 py-20 flex  flex-wrap">
-      <div class="border-2 m-10 p-4 bg-blue-100 border-blue-400 max-h-60    rounded-lg">
+    <div class="pl-24 py-20 flex ">
+      <div class="border-2 mx-auto p-4 bg-blue-100 border-blue-400 max-h-60    rounded-lg">
          <h1 class="text-center font-bold text-lg">ADD A COURSE</h1>
         <input class="mt-7 min-w-full " v-model="newCourse" type="text" placeholder="Course Name"  />
 <div class="text-right p-5 text-lg">
@@ -111,7 +111,7 @@ async function deleteCourse(idToDel) {
         </button>
       </div>
       <div
-        class="bg-blue-100 border-2 border-blue-400 rounded-xl text-xl max-w-3x   "
+        class="bg-blue-100 border-2 border-blue-400 rounded-xl text-xl max-w-3x mx-auto  "
       >
         <table class="m-5 ">
         
