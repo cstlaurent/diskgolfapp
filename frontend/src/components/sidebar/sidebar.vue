@@ -43,18 +43,18 @@ import {
       </div>
     </div>
     <div v-else class="text-white">
-      <div class="my-10 text-2xl">
-        <router-link to="/"><HomeIcon /></router-link>
+      <div class="mt-32">
+        <router-link to="/"><HomeIcon class="max-h-8" /></router-link>
       </div>
 
-      <div class="my-10 text-2xl">
-        <router-link to="/games"><PlayIcon /></router-link>
+      <div class="my-10">
+        <router-link to="/games"><PlayIcon class="max-h-8" /></router-link>
       </div>
-      <div class="my-10 text-2xl">
-        <router-link to="/players"><UserIcon /></router-link>
+      <div class="my-10">
+        <router-link to="/players"><UserIcon class="max-h-8" /></router-link>
       </div>
-      <div class="my-10 text-2xl">
-        <router-link to="/Courses"><GlobeIcon /></router-link>
+      <div class="my-10">
+        <router-link to="/Courses"><GlobeIcon class="max-h-8" /></router-link>
       </div>
     </div>
   </div>
