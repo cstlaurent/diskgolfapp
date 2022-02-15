@@ -5,7 +5,7 @@ import Nav from './components/Nav.vue'
 </script>
 
 <template>
-  <div class="max-w-full border-black border-2">
+  <div class="max-w-full">
     <Nav class="border-2 border-blue-400 rounded-xl" />
 
     <!-- ----------------------------------------------------------------------------------------- -->

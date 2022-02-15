@@ -65,15 +65,17 @@ async function deleteCourse(idToDel) {
 </script>
 
 <template>
-  <div class="flex-col border-2 border-red-600">
+  <div class="flex-col  ">
     <div class="">
-      <h1 class="text-center font-bold text-4xl">COURSE PAGE</h1>
+      <h1 class="text-center font-bold text-4xl pt-10">COURSES PAGE</h1>
     </div>
-    <div class="pl-24 py-20 flex bg-yellow-100">
-      <div class="border-2 border-blue-400 w-64 h-48 rounded-lg">
-        <input class="mt-7" v-model="newCourse" type="text" />
-
-        <input
+    <div class="pl-24 py-20 flex  flex-wrap">
+      <div class="border-2 m-10 p-4 bg-blue-100 border-blue-400 max-h-60    rounded-lg">
+         <h1 class="text-center font-bold text-lg">ADD A COURSE</h1>
+        <input class="mt-7 min-w-full " v-model="newCourse" type="text" placeholder="Course Name"  />
+<div class="text-right p-5 text-lg">
+ 
+        <input class=""
           v-model="courseSetup"
           type="radio"
           id="courseconfig"
@@ -90,11 +92,12 @@ async function deleteCourse(idToDel) {
           value="9"
         />
         <label for="9">9</label>
+        </div>
 
-        <button
+        <button 
           @click="post"
           v-if="isEditMode === false"
-          class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 rounded-xl"
+          class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-20 rounded-xl "
         >
           Add Course
         </button>
@@ -102,37 +105,33 @@ async function deleteCourse(idToDel) {
         <button
           @click="post"
           v-else
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-xl mb-5"
+          class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-20 rounded-xl mb-5"
         >
           Save
         </button>
       </div>
       <div
-        class="bg-blue-100 border-2 border-blue-400 rounded-xl text-xl w-1/3 "
+        class="bg-blue-100 border-2 border-blue-400 rounded-xl text-xl max-w-3x   "
       >
-        <table class="">
-          <th>course</th>
-          <th></th>
-          <th></th>
-          <tr v-for="(c, id) in courses">
-            <td class="px-10">
+        <table class="m-5 ">
+        
+          
+          <tr  v-for="(c, id) in courses">
+            <td class="px-10 ">
               {{ c.name }}
             </td>
-            <tr><td class="px-10">{{c.setup}}</td></tr>
-            <td class="bg-pink-200 px-10">
-              <button @click="deleteCourse(c.id)" class="">DELETE</button>
+            <tr><td class="px-10 ">{{c.setup}}</td></tr>
+            <td class="">
+              <button @click="deleteCourse(c.id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">DELETE</button>
             </td>
-            <td class="px-10">
-              <button @click="editCourse(c.id)" class="">EDIT</button>
+            <td class="px-10 ">
+              <button @click="editCourse(c.id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">EDIT</button>
             </td>
           </tr>
         </table>
       </div>
     </div>
-    <div class="bg-yellow-200"></div>
-    <div class="bg-pink-200"><p>test</p></div>
-    <div class="bg-green-200"><p>test</p></div>
-    <div class="bg-red-200"><p>test</p></div>
+    
   </div>
 
   <!-- <div class="text-xl font-bold text-blue-500 ml-6" v-for="c in courses">
