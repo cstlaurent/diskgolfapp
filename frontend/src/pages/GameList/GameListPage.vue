@@ -93,6 +93,7 @@ function editGame(id) {
 </script>
 
 <template>
+  <h1 class="font-Oswald pt-10 text-center text-5xl font-bold">GAMES</h1>
   <div
     class="mx-auto mt-24 max-w-md flex-col rounded-2xl border-4 border-blue-400 bg-blue-100 p-5"
   >
@@ -173,7 +174,5 @@ function editGame(id) {
     </tr>
   </table>
 
-  <div>{{ savedGames }}</div>
-
-  <Gamemodule />
+  <!-- <Gamemodule /> -->
 </template>

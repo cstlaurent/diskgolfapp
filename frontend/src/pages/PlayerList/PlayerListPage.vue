@@ -64,63 +64,60 @@ async function deletePlayer(idToDel) {
 </script>
 
 <template>
-  <div class="text-4xl font-bold text-center bg-blue-200 mt-10 mb-48">
-    PLAYERS
-  </div>
-
-  <div class="my-40 bg-yellow-100">
-    <div>
-      <input
-        name="Addplayer"
-        class="bg-violet-200 mx-20 w-1/2"
-        v-model="newPlayer"
-      />
-      <button
-        @click="post"
-        v-if="isEditMode === false"
-        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 rounded-full w-52"
+  <h1 class="font-Oswald pt-10 text-center text-5xl font-bold">PLAYERS</h1>
+  <div class="flex-col">
+    <div class="mx-auto max-w-lg snap-center">
+      <div
+        class="m-10 mx-auto rounded-lg border-2 border-blue-400 bg-blue-100 p-4"
       >
-        Add Player
-      </button>
-      <button
-        @click="post"
-        v-else
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-20 rounded-full ml-60 mb-5"
-      >
-        Save
-      </button>
+        <input
+          class="m-4"
+          type="text"
+          placeholder="Player Name"
+          name="Addplayer"
+          v-model="newPlayer"
+        />
+        <button
+          @click="post"
+          v-if="isEditMode === false"
+          class="mx-8 rounded-full bg-blue-500 py-2 px-2 font-bold text-white hover:bg-blue-700"
+        >
+          Add Player
+        </button>
+        <button
+          @click="post"
+          v-else
+          class="mx-8 rounded-full bg-blue-500 py-2 px-10 font-bold text-white hover:bg-blue-700"
+        >
+          Save
+        </button>
+      </div>
     </div>
+
+    <table class="mx-auto mt-24 w-5/12 border-2 border-blue-500 bg-blue-100">
+      <tr class="text-xl font-bold">
+        <th>Players</th>
+        <th></th>
+      </tr>
+
+      <tr :key="pl.id" v-for="pl in players" class="border-2 border-blue-200">
+        <td>{{ pl.name }}</td>
+
+        <td class="ml-64 flex gap-2">
+          <button
+            class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
+            @click="deletePlayer(pl.id)"
+          >
+            DELETE
+          </button>
+          <button
+            class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
+            @click="editPlayer(pl.id)"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
-
-  <table class="border-2 border-blue-500 bg-blue-100 mt-24 mx-auto w-5/12">
-    <tr class="font-bold text-xl">
-      <th>Players</th>
-      <th></th>
-    </tr>
-
-    <tr :key="pl.id" v-for="pl in players" class="border-2 border-blue-200">
-      <td>{{ pl.name }}</td>
-
-      <td class="flex gap-2 ml-64">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="deletePlayer(pl.id)"
-        >
-          DELETE
-        </button>
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full w-20"
-          @click="editPlayer(pl.id)"
-        >
-          Edit
-        </button>
-      </td>
-    </tr>
-  </table>
-
-  <div class="text-xl font-bold text-blue-500 ml-6" v-for="pl in players">
-    {{ pl.name }}
-  </div>
-
-  <div>{{ players }}</div>
 </template>

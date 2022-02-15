@@ -67,7 +67,7 @@ async function deleteCourse(idToDel) {
 <template>
   <div class="flex-col  ">
     <div class="">
-      <h1 class="text-center font-bold text-4xl pt-10">COURSES PAGE</h1>
+      <h1 class="text-center font-bold text-5xl pt-10 font-Oswald ">COURSES</h1>
     </div>
     <div class="pl-24 py-20 flex  flex-wrap">
       <div class="border-2 m-10 p-4 bg-blue-100 border-blue-400 max-h-60    rounded-lg">
