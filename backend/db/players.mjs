@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import { db } from './index.mjs'
 
 const players = [
   {
@@ -15,8 +16,10 @@ const players = [
   },
 ]
 
-export function getPlayers() {
-  return players
+export async function getPlayers() {
+  const mongoPlayers = await db.collection('player').find().toArray()
+  console.log(mongoPlayers)
+  return mongoPlayers
 }
 export function getPlayer(id) {
   const player = players.find((player) => id === player.id)

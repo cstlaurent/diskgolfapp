@@ -10,7 +10,7 @@ function playerRoutes(app, options, done) {
   // Get players
 
   app.get('/players', async (request, reply) => {
-    return { players: getPlayers() }
+    return { players: await getPlayers() }
   })
 
   // Get specific players
