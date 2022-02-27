@@ -2,18 +2,18 @@ import { nanoid } from 'nanoid'
 import { db } from './index.mjs'
 
 const players = [
-  {
-    id: '-JNsUyQ0E7Hiujjx5icG-',
-    name: 'Mick',
-  },
-  {
-    id: 'uYMqZXiFzbrkjhV-yWiO_',
-    name: 'Carl',
-  },
-  {
-    id: 'uYMqZXiFzbr-yWiO_',
-    name: 'Gary',
-  },
+  // {
+  //   id: '-JNsUyQ0E7Hiujjx5icG-',
+  //   name: 'Mick',
+  // },
+  // {
+  //   id: 'uYMqZXiFzbrkjhV-yWiO_',
+  //   name: 'Carl',
+  // },
+  // {
+  //   id: 'uYMqZXiFzbr-yWiO_',
+  //   name: 'Gary',
+  // },
 ]
 
 export async function getPlayers() {
@@ -23,19 +23,16 @@ export async function getPlayers() {
 }
 export function getPlayer(id) {
   const player = players.find((player) => id === player.id)
-  console.log(player)
+
   return player
 }
 
 export function addPlayer(playerName) {
   const player = {
-    id: nanoid(),
     name: playerName,
   }
 
-  players.push(player)
-
-  return player
+  db.collection('player').insertOne(player)
 }
 
 export function editPlayer(idToEdit, playerName) {
@@ -47,8 +44,8 @@ export function editPlayer(idToEdit, playerName) {
   return playerName
 }
 
-export function deletePlayer(id) {
-  const playerIndex = players.findIndex((player) => id === player.id)
-
-  players.splice(playerIndex, 1)
+export async function deletePlayer(id) {
+  console.log('IDIDIDID', id)
+  let foundP = await db.collection('player').deleteOne({ _id: id })
+  return foundP
 }

@@ -57,6 +57,7 @@ function playerRoutes(app, options, done) {
   // Delete specific player
   app.delete('/player/:id', async (request, reply) => {
     // Receive Id as url params
+
     const requestedID = request.params.id
     deletePlayer(requestedID)
     return 'player deleted'

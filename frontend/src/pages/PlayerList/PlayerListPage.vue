@@ -101,13 +101,13 @@ async function deletePlayer(idToDel) {
         <td class="ml-64 flex gap-2">
           <button
             class="rounded-lg bg-blue-400 font-bold text-white hover:bg-blue-600"
-            @click="deletePlayer(pl.id)"
+            @click="deletePlayer(pl._id)"
           >
             DELETE
           </button>
           <button
             class="rounded-lg bg-blue-400 px-5 py-2 font-bold text-white hover:bg-blue-600"
-            @click="editPlayer(pl.id)"
+            @click="editPlayer(pl._id)"
           >
             Edit
           </button>
