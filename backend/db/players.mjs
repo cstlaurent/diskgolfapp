@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { nanoid } from 'nanoid'
 import { db } from './index.mjs'
 
@@ -21,9 +22,12 @@ export async function getPlayers() {
   console.log(mongoPlayers)
   return mongoPlayers
 }
-export function getPlayer(id) {
-  const player = players.find((player) => id === player.id)
-
+export async function getPlayer(id) {
+  const player = await db
+    .collection('player')
+    .find({ _id: ObjectId(id) })
+    .toArray()
+  console.log(player)
   return player
 }
 
@@ -44,8 +48,6 @@ export function editPlayer(idToEdit, playerName) {
   return playerName
 }
 
-export async function deletePlayer(id) {
-  console.log('IDIDIDID', id)
-  let foundP = await db.collection('player').deleteOne({ _id: id })
-  return foundP
+export function deletePlayer(id) {
+  db.collection('player').deleteOne({ _id: ObjectId(id) })
 }
