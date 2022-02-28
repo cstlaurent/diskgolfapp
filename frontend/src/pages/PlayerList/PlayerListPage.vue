@@ -51,7 +51,7 @@ async function editPlayer(idToEdit) {
   isEditMode.value = idToEdit
   // verifier ID pour chaque players
   for (const PLA of players.value) {
-    if (PLA.id === idToEdit) {
+    if (PLA._id === idToEdit) {
       newPlayer.value = PLA.name
     }
   }

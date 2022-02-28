@@ -1,53 +1,35 @@
-import { nanoid } from 'nanoid'
+import { ObjectId } from 'mongodb'
+import { db } from './index.mjs'
 
-const courses = [
-  {
-    id: '-JNsUyQ0E7Hiujjx5',
-    name: 'terrebonne',
-    setup: 18,
-  },
-  {
-    id: 'uYMqZXiFzbrkjh',
-    name: 'mirabel',
-    setup: 9,
-  },
-  {
-    id: 'uYMqZXiFzb',
-    name: 'ile Charron',
-    setup: 9,
-  },
-]
-
-export function getCourses() {
-  return courses
+export async function getCourses() {
+  const mongoCourses = await db.collection('course').find().toArray()
+  console.log(mongoCourses)
+  return mongoCourses
 }
-export function getCourse(id) {
-  const course = courses.find((course) => id === course.id)
+export async function getCourse(id) {
+  const course = await db
+    .collection('course')
+    .find({ _id: ObjectId(id) })
+    .toArray()
   console.log(course)
   return course
 }
 
 export function addCourse(courseName, courseSetup) {
   const course = {
-    id: nanoid(),
     name: courseName,
     setup: courseSetup,
   }
-
-  courses.push(course)
-
-  return course
+  db.collection('course').insertOne(course)
 }
 
 export function editCourse(idToEdit, courseName, setup) {
-  const editedCourse = courses.find((course) => idToEdit === course.id)
-  editedCourse.name = courseName
-  editedCourse.setup = setup
-  return editedCourse
+  db.collection('course').updateOne(
+    { _id: ObjectId(idToEdit) },
+    { $set: { name: courseName, setup: setup } }
+  )
 }
 
 export function deleteCourse(id) {
-  const courseIndex = courses.findIndex((course) => id === course.id)
-
-  courses.splice(courseIndex, 1)
+  db.collection('course').deleteOne({ _id: ObjectId(id) })
 }

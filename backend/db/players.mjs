@@ -1,21 +1,6 @@
 import { ObjectId } from 'mongodb'
-import { nanoid } from 'nanoid'
-import { db } from './index.mjs'
 
-const players = [
-  // {
-  //   id: '-JNsUyQ0E7Hiujjx5icG-',
-  //   name: 'Mick',
-  // },
-  // {
-  //   id: 'uYMqZXiFzbrkjhV-yWiO_',
-  //   name: 'Carl',
-  // },
-  // {
-  //   id: 'uYMqZXiFzbr-yWiO_',
-  //   name: 'Gary',
-  // },
-]
+import { db } from './index.mjs'
 
 export async function getPlayers() {
   const mongoPlayers = await db.collection('player').find().toArray()
@@ -40,12 +25,10 @@ export function addPlayer(playerName) {
 }
 
 export function editPlayer(idToEdit, playerName) {
-  const editedPlayer = players.find((player) => idToEdit === player.id)
-  if (editedPlayer === undefined) {
-    return null
-  }
-  editedPlayer.name = playerName
-  return playerName
+  db.collection('player').updateOne(
+    { _id: ObjectId(idToEdit) },
+    { $set: { name: playerName } }
+  )
 }
 
 export function deletePlayer(id) {

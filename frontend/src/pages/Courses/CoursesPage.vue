@@ -52,7 +52,7 @@ async function post() {
 async function editCourse(idToEdit) {
   isEditMode.value = idToEdit
   for (const c of courses.value) {
-    if (c.id === idToEdit) {
+    if (c._id === idToEdit) {
       newCourse.value = c.name
     }
   }
@@ -122,10 +122,10 @@ async function deleteCourse(idToDel) {
             </td>
             <tr><td class="px-10 ">{{c.setup}}</td></tr>
             <td class="">
-              <button @click="deleteCourse(c.id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">DELETE</button>
+              <button @click="deleteCourse(c._id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">DELETE</button>
             </td>
             <td class="px-10 ">
-              <button @click="editCourse(c.id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">EDIT</button>
+              <button @click="editCourse(c._id)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">EDIT</button>
             </td>
           </tr>
         </table>

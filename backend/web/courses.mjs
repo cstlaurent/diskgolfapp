@@ -9,7 +9,7 @@ import {
 function courseRoutes(app, options, done) {
   // Get courses
   app.get('/courses', async (request, reply) => {
-    return { courses: getCourses() }
+    return { courses: await getCourses() }
   })
 
   //Get specific course

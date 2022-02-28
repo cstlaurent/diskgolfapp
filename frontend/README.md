@@ -129,6 +129,8 @@ display score pour trou selectionne
 - menage pour tout mettre en flexbox
   -regler score pour chaque trou DONE (watch)
 
-# A FAIRE UN JOUR
+# A faire
 
-- Afficher loading v-else
+fix edit player pour ajouter le nom a changer dans input OK
+
+plug Courses-Mongo
