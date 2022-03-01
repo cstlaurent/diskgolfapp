@@ -20,12 +20,14 @@ async function getGameToPlay() {
 
 onMounted(async () => {
   game.value = await getGameToPlay()
-  //Pull hole setup
+  // Pull hole setup
   holeSetup.value = game?.value?.course.setup
 })
 </script>
 
 <template>
+  <div>test</div>
+  {{ game?.value?.course }}
   <div>GAME= {{ game }}</div>
 
   <div
@@ -48,5 +50,6 @@ onMounted(async () => {
   />
 
   <div>{{ hHole }}</div>
-  <div></div>
+
+  <div>{{ holeSetup }}</div>
 </template>

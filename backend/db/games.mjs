@@ -1,27 +1,29 @@
-import { nanoid } from 'nanoid'
+import { ObjectId } from 'mongodb'
+import { db } from './index.mjs'
 
-const games = []
-
-export function getGames() {
-  return games
+export async function getGames() {
+  const mongoGames = await db.collection('game').find().toArray()
+  console.log(mongoGames)
+  return mongoGames
 }
-export function getGame(id) {
-  const game = games.find((game) => id === game.id)
+export async function getGame(id) {
+  const game = await db
+    .collection('game')
+    .find({ _id: ObjectId(id) })
+    .toArray()
   console.log(game)
-  return game
+  return game[0]
+  // COMMENT JE RETIRE LE [0] ????
 }
 
 export function addGame(players, course, date) {
   const game = {
-    id: nanoid(),
     players: players,
     course: course,
     date: date,
   }
 
-  games.push(game)
-
-  return game
+  db.collection('game').insertOne(game)
 }
 
 export function editGame(idToEdit, playerName, courseName, date) {
@@ -33,7 +35,5 @@ export function editGame(idToEdit, playerName, courseName, date) {
 }
 
 export function deleteGame(id) {
-  const gameIndex = games.findIndex((game) => id === game.id)
-
-  games.splice(gameIndex, 1)
+  db.collection('game').deleteOne({ _id: ObjectId(id) })
 }

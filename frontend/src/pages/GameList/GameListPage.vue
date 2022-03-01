@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { nanoid } from 'nanoid'
-import Gamemodule from '../../components/Games.vue'
+
 import dropdownPlayer from '../../components/DropDown.vue'
 import dropdownCourse from '../../components/DropDownCourse.vue'
 import * as apiPlayers from '../../api/players'
@@ -119,7 +119,7 @@ function editGame(id) {
       </tr>
 
       <tr
-        v-for="(player, id) in selectedPlayers"
+        v-for="(player, _id) in selectedPlayers"
         class="border-2 border-blue-200"
       >
         <td>{{ player.name }}</td>
@@ -151,7 +151,7 @@ function editGame(id) {
       <th></th>
     </tr>
 
-    <tr v-for="(game, id) in savedGames" class="border-2 border-blue-200">
+    <tr v-for="(game, _id) in savedGames" class="border-2 border-blue-200">
       <td v-for="player in game.players">{{ player.name }}</td>
       <td v-if="game.course">{{ game.course.name }}</td>
       <td>{{ date }}</td>
@@ -159,13 +159,13 @@ function editGame(id) {
       <td class="flex gap-2">
         <button
           class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
-          @click="deleteGame(id)"
+          @click="deleteGame(game._id)"
         >
           DELETE
         </button>
         <div>
           <router-link
-            :to="`/PlayGame/${game.id}`"
+            :to="`/PlayGame/${game._id}`"
             class="w-20 rounded-full bg-blue-500 font-bold text-white hover:bg-blue-700"
             >playgame</router-link
           >
@@ -173,6 +173,4 @@ function editGame(id) {
       </td>
     </tr>
   </table>
-
-  <!-- <Gamemodule /> -->
 </template>

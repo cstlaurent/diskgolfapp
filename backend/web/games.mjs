@@ -9,7 +9,7 @@ import {
 function gamesRoutes(app, options, done) {
   // Get games
   app.get('/games', async (request, reply) => {
-    return { games: getGames() }
+    return { games: await getGames() }
   })
 
   // Get specific game

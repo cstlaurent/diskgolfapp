@@ -131,6 +131,8 @@ display score pour trou selectionne
 
 # A faire
 
-fix edit player pour ajouter le nom a changer dans input OK
+- fix premier ajout player ou course qui n'affiche pas
+- affichage holes dans playgame (affiche seulement le chiffre du trou)
+  -hole setup?
 
 plug Courses-Mongo
