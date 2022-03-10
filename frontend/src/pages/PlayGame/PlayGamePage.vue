@@ -7,7 +7,7 @@ const route = useRoute()
 const game = ref({})
 const gameId = route.params.id
 const currentHole = ref(1)
-const holeSetup = ref(0)
+const holeSetup = ref()
 const hHole = ref('h1')
 const specificScore = ref(0)
 
@@ -21,7 +21,7 @@ async function getGameToPlay() {
 onMounted(async () => {
   game.value = await getGameToPlay()
   // Pull hole setup
-  holeSetup.value = game?.value?.course.setup
+  holeSetup.value = parseInt(game?.value?.course.setup)
 })
 </script>
 
