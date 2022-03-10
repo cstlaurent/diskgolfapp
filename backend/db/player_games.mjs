@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+import { db } from './index.mjs'
 const playerGames = [
   // {
   //   gameId: '9uD4mOkk-pTo9HqrDagz-',
@@ -13,8 +15,9 @@ const playerGames = [
   // },
 ]
 
-export function getPlayerGames() {
-  return playerGames
+export async function getPlayerGames() {
+  const mongoPlayerGames = await db.collection('playergames').find().toArray()
+  console.log(mongoPlayerGames)
 }
 
 export function getPlayerGame(pgid) {
@@ -28,7 +31,7 @@ export function getPlayerGame(pgid) {
   return pgArray
 }
 
-export function saveGame(playerId, hole, score, gameId) {
+export async function saveGame(playerId, hole, score, gameId) {
   let found = false
   const savedGame = {
     gameId: gameId,
@@ -36,19 +39,14 @@ export function saveGame(playerId, hole, score, gameId) {
     hole: hole,
     score: score,
   }
-  for (let game of playerGames) {
-    if (
-      game.gameId === gameId &&
-      game.playerId === playerId &&
-      game.hole === hole
-    ) {
-      game.score = score
-      found = true
-      break
-    }
-  }
+  let test = await db
+    .collection('playergames')
+    .find({ gameId: gameId, playerId: playerId, hole: hole })
+    .toArray()
+  console.log('test ====', test)
+
   if (found === false) {
-    playerGames.push(savedGame)
+    db.collection('playergames').insertOne(savedGame)
   }
 
   return savedGame

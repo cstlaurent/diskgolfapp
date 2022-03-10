@@ -132,7 +132,6 @@ display score pour trou selectionne
 # A faire
 
 - fix premier ajout player ou course qui n'affiche pas
-- affichage holes dans playgame (affiche seulement le chiffre du trou)
-  -hole setup?
+  -playergames mongo
 
-plug Courses-Mongo
+  -Pour save je dois vérifier si la il y a deja un score pour ce player/course/hole. si true -> update

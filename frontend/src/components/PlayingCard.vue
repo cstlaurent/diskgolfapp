@@ -33,7 +33,7 @@ const props = defineProps({
               v-for="player in props?.game?.players"
               :player="player"
               :hole="currentHole"
-              :gameId="props.game.id"
+              :gameId="props.game._id"
             />
           </div>
         </div>

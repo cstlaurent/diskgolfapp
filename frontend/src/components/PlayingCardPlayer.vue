@@ -8,13 +8,13 @@ const props = defineProps({
 const specificScore = ref()
 
 onMounted(async () => {
-  await getScore(props.player.id, props.hole, props.gameId)
+  await getScore(props.player._id, props.hole, props.gameId)
 })
 
 watch(
   () => props?.hole,
   (last, newHole) => {
-    if (last !== newHole) getScore(props.player.id, props.hole, props.gameId)
+    if (last !== newHole) getScore(props.player._id, props.hole, props.gameId)
   }
 )
 
@@ -57,7 +57,7 @@ async function getScore(playerId, hole, gameId) {
 async function increaseScore() {
   specificScore.value++
   await saveScore(
-    props.player.id,
+    props.player._id,
     props.hole,
     specificScore.value,
     props.gameId
@@ -67,7 +67,7 @@ async function increaseScore() {
 async function decreaseScore() {
   specificScore.value--
   await saveScore(
-    props.player.id,
+    props.player._id,
     props.hole,
     specificScore.value,
     props.gameId
